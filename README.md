@@ -9,4 +9,4 @@
 #### Stop ####
 `make stop` <br>
 
-<img src="https://github.com/magdyismail88/notebook/blob/main/img/note02.png" width="400" height="400" />
+<img src="https://github.com/magdyismail88/notebook/blob/main/img/note02.png" />
