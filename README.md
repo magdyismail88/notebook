@@ -3,8 +3,8 @@
 ### Built with Golang 1.16 && VueJS 2.x ###
 
 #### Install ####
-`make install`
-`make run`
+`make install` <br>
+`make run` <br>
 
 #### Stop ####
-`make stop`
+`make stop` <br>
