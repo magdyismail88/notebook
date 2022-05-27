@@ -1,5 +1,5 @@
-### Notebook v1.0.0 ( simple design ) ###
-#### Built with Golang 1.16 && VueJS 2.x ####
+### Notebook v1.0.0 ( Simple design && Flat Arch ) ###
+##### Built with Golang 1.16 && VueJS 2.x && SQLite3 #####
 
 #### Install ####
 `make install` <br>
