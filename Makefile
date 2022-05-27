@@ -6,10 +6,10 @@ stop:
 	killall -9 notebook
 	sleep 1
 	echo "Server stopped"
-install:
+build:
 	# Build js
 	cd ./frontend && npm install --save --legacy-peer-deps
-	# Build go	
+	# Build go
 	go mod tidy # install go models requirements (pre-requesties)
 	go build .
 	go run init/migration.go
