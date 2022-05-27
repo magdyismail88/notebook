@@ -1,4 +1,4 @@
-### Notebook v1.0.0 ( simple design )###
+### Notebook v1.0.0 ( simple design ) ###
 #### Built with Golang 1.16 && VueJS 2.x ####
 
 #### Install ####
