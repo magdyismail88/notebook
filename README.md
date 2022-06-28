@@ -5,6 +5,8 @@
 `make build` <br>
 `make run` <br>
 
+`localhost:8889`
+
 #### Stop the server ####
 `make stop` <br>
 
