@@ -28,7 +28,7 @@ or
 $ ./bin/notebook-bin
 ```
 
-<img src="https://github.com/magdyismail88/notebook/blob/597001e4f408d8f0ad202815778fcbb442651f67/assets/screenshot01.png" alt="screenshot01" />
+<img src="https://github.com/magdyismail88/notebook/blob/651a9dccc2776d49b47fe0ef07d3b720f2e53038/assets/screenshot01.png" alt="screenshot01" />
 
 
 ### Application Structure
