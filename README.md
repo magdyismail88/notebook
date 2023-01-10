@@ -45,10 +45,9 @@ $ ./bin/notebook-bin
 │   └── uploader.go
 ├── app.go
 ├── assets
-│   ├── note00.png
-│   ├── note01.png
-│   └── note02.png
+│   └── note2.png
 ├── bin
+│   └── notebook-bin
 ├── bootstrap
 │   └── install.go
 ├── data
@@ -82,8 +81,6 @@ $ ./bin/notebook-bin
 │   │   ├── assets
 │   │   │   └── logo.png
 │   │   ├── components
-│   │   │   ├── Auth
-│   │   │   │   └── Login.vue
 │   │   │   ├── Container
 │   │   │   │   ├── ContainerChangeForm.vue
 │   │   │   │   ├── ContainerEditForm.vue

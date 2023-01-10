@@ -4,6 +4,7 @@ node_modules/
 
 bin/notebook-bin
 frontend/dist/
+data/notebook.db
 
 !bin/.gitkeep
 !storage/.gitkeep
