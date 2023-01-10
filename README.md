@@ -1,6 +1,5 @@
 # Notebook
 
-![Notebook](https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/assets/go-backend-arch-diagram.png?raw=true)
 
 ```bash
 $ go run app.go --help
@@ -29,7 +28,7 @@ or
 $ ./bin/notebook-bin
 ```
 
-<img src="https://github.com/magdyismail88/notebook/blob/651a9dccc2776d49b47fe0ef07d3b720f2e53038/assets/screenshot01.png" alt="screenshot01" />
+![Notebook](https://github.com/magdyismail88/notebook/blob/651a9dccc2776d49b47fe0ef07d3b720f2e53038/assets/screenshot01.png" alt="screenshot01)
 
 
 ### Application Structure
