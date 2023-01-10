@@ -44,8 +44,6 @@ $ ./bin/notebook-bin
 │   ├── tab.go
 │   └── uploader.go
 ├── app.go
-├── assets
-│   └── screenshot01.png
 ├── bin
 │   └── notebook-bin
 ├── bootstrap
