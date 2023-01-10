@@ -1,4 +1,4 @@
-module notebook
+module github.com/magdyismail88/notebook
 
 go 1.16
 

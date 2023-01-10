@@ -11,12 +11,12 @@
 				<NoteShow :n=note></NoteShow>
 
 
-				<a href="#" type="button"
+				<!-- <a href="#" type="button"
 		        class="mt-4"
 				data-bs-toggle="modal"
 				:data-bs-target="noteShowUniqueID"
 				data-bs-whatever="@getbootstrap"><i class="bi bi-eye"></i>&nbsp;
-				</a>
+				</a> -->
 
 				<!-- <a href="#" type="button"
 		        class="mt-4"
@@ -25,10 +25,16 @@
 				data-bs-whatever="@getbootstrap"><i class="bi bi-pencil-square"></i>
 				</a> -->
 
-				<router-link 
+				<!-- <router-link 
 					:to="{name: 'NoteEditForm', params: {id: note.id} }"
 					class="mt-4"> 
 					<i class="bi bi-pencil-square"></i>	
+				</router-link> -->
+
+				<router-link 
+					:to="{name: 'NoteEditForm', params: {id: note.id} }"
+					class="mt-4"> 
+					<i class="bi bi-eye"></i>	
 				</router-link>
 
 
