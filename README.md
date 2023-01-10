@@ -4,7 +4,7 @@ Simple notebook application written with golang, vue and Sqlite3 for more portab
 
 
 
->#### Requirments
+### Requirments
 - Golang
 - npm
 
@@ -37,7 +37,7 @@ or
 $ ./bin/notebook-bin
 ```
 
-> Example
+### Example
 
 ![Screenshot](https://github.com/magdyismail88/notebook/blob/651a9dccc2776d49b47fe0ef07d3b720f2e53038/assets/screenshot01.png?raw=true")
 
