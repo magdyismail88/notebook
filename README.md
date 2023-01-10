@@ -2,8 +2,9 @@
 
 Simple notebook application written with golang, vue and Sqlite3 for more portable and simple
 
-#### Prerequesits
-- Install golang
+#### Requirments
+- Golang
+- npm
 
 
 ```bash
