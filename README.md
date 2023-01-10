@@ -91,7 +91,6 @@ $ ./bin/notebook-bin
 │   │   │   ├── Note
 │   │   │   │   ├── NoteEditForm.vue
 │   │   │   │   ├── NoteForm.vue
-│   │   │   │   ├── NoteShow.vue
 │   │   │   │   └── Note.vue
 │   │   │   ├── partials
 │   │   │   │   └── Header.vue
