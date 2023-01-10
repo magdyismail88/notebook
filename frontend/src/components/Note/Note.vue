@@ -8,36 +8,11 @@
 			<div class="card-body">Navigate the detail</div>
 			<div class="card-footer">
 
-				<NoteShow :n=note></NoteShow>
-
-
-				<!-- <a href="#" type="button"
-		        class="mt-4"
-				data-bs-toggle="modal"
-				:data-bs-target="noteShowUniqueID"
-				data-bs-whatever="@getbootstrap"><i class="bi bi-eye"></i>&nbsp;
-				</a> -->
-
-				<!-- <a href="#" type="button"
-		        class="mt-4"
-				data-bs-toggle="modal"
-				:data-bs-target="noteEditFormUniqueID"
-				data-bs-whatever="@getbootstrap"><i class="bi bi-pencil-square"></i>
-				</a> -->
-
-				<!-- <router-link 
-					:to="{name: 'NoteEditForm', params: {id: note.id} }"
-					class="mt-4"> 
-					<i class="bi bi-pencil-square"></i>	
-				</router-link> -->
-
 				<router-link 
 					:to="{name: 'NoteEditForm', params: {id: note.id} }"
 					class="mt-4"> 
 					<i class="bi bi-eye"></i>	
 				</router-link>
-
-
 
 			</div>
 		</div>
