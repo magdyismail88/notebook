@@ -1,5 +1,6 @@
 # Notebook
 
+![Notebook](https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/assets/go-backend-arch-diagram.png?raw=true)
 
 ```bash
 $ go run app.go --help
@@ -68,3 +69,5 @@ $ ./bin/notebook-bin
 └── util
     └── move_file.go
 ```
+
+Magdy Ismail
