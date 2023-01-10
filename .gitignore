@@ -2,6 +2,9 @@
 node_modules/
 /dist/
 
+bin/notebook-bin
+frontend/dist/
+
 !bin/.gitkeep
 !storage/.gitkeep
 !data/.gitkeep

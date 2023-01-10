@@ -1,9 +1,6 @@
 # Notebook
 
 
-<img src="https://github.com/magdyismail88/notebook/blob/main/assets/note02.png" />
-
-
 ```bash
 $ go run app.go --help
 ```
@@ -30,6 +27,9 @@ or
 ```bash
 $ ./bin/notebook-bin
 ```
+
+<img src="https://github.com/magdyismail88/notebook/blob/main/assets/note02.png" />
+
 
 ### Application Structure
 
