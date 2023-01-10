@@ -45,7 +45,7 @@ $ ./bin/notebook-bin
 │   └── uploader.go
 ├── app.go
 ├── assets
-│   └── note2.png
+│   └── screenshot01.png
 ├── bin
 │   └── notebook-bin
 ├── bootstrap
@@ -60,63 +60,6 @@ $ ./bin/notebook-bin
 │   └── tab.go
 ├── data.txt
 ├── frontend
-│   ├── build
-│   │   ├── build.js
-│   │   ├── check-versions.js
-│   │   ├── logo.png
-│   │   ├── utils.js
-│   │   ├── vue-loader.conf.js
-│   │   ├── webpack.base.conf.js
-│   │   ├── webpack.dev.conf.js
-│   │   └── webpack.prod.conf.js
-│   ├── config
-│   │   ├── dev.env.js
-│   │   ├── index.js
-│   │   └── prod.env.js
-│   ├── index.html
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── src
-│   │   ├── App.vue
-│   │   ├── assets
-│   │   │   └── logo.png
-│   │   ├── components
-│   │   │   ├── Container
-│   │   │   │   ├── ContainerChangeForm.vue
-│   │   │   │   ├── ContainerEditForm.vue
-│   │   │   │   ├── ContainerForm.vue
-│   │   │   │   └── Container.vue
-│   │   │   ├── Flash.vue
-│   │   │   ├── Home.vue
-│   │   │   ├── Note
-│   │   │   │   ├── NoteEditForm.vue
-│   │   │   │   ├── NoteForm.vue
-│   │   │   │   └── Note.vue
-│   │   │   ├── partials
-│   │   │   │   └── Header.vue
-│   │   │   └── Tab
-│   │   │       ├── TabEditForm.vue
-│   │   │       ├── TabForm.vue
-│   │   │       ├── Tabs.vue
-│   │   │       └── Tab.vue
-│   │   ├── helpers
-│   │   │   └── utils.js
-│   │   ├── main.js
-│   │   ├── router
-│   │   │   └── index.js
-│   │   └── store
-│   │       ├── index.js
-│   │       └── modules
-│   │           ├── container.js
-│   │           ├── note.js
-│   │           └── tab.js
-│   └── static
-│       ├── css
-│       │   └── style.css
-│       ├── img
-│       │   └── logo.png
-│       └── js
-│           └── script.js
 ├── go.mod
 ├── go.sum
 ├── LICENSE
