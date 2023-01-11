@@ -20,7 +20,7 @@ Usage:
 	go run app.go [--argument]
 
 The commands are:
-	--build          build dependencies
+	--build        build dependencies
 	--server	     start server
 ```
 

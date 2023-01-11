@@ -16,8 +16,8 @@ Usage:
 	go run app.go [--argument]
 
 The commands are:
-	--build          build dependencies
-	--server	     start server 
+	--build        build dependencies
+	--server	     start server
 `
 
 	runServer = `
