@@ -79,7 +79,3 @@ $ ./bin/notebook-bin
 └── util
     └── move_file.go
 ```
-
-
-
-Magdy Ismail
