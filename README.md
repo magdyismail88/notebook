@@ -57,7 +57,7 @@ $ ./bin/notebook-bin
 ├── app.go
 ├── bin
 │   └── notebook-bin
-├── bootstrap
+├── cmd
 │   └── install.go
 ├── data
 │   └── notebook.db
@@ -67,7 +67,6 @@ $ ./bin/notebook-bin
 │   ├── migration.go
 │   ├── note.go
 │   └── tab.go
-├── data.txt
 ├── frontend
 ├── go.mod
 ├── go.sum

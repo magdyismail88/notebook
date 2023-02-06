@@ -6,6 +6,8 @@ bin/notebook-bin
 frontend/dist/
 data/notebook.db
 
+bootstrap
+
 !bin/.gitkeep
 !storage/.gitkeep
 !data/.gitkeep
