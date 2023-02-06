@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/magdyismail88/notebook/bootstrap"
+	"github.com/magdyismail88/notebook/cmd"
 )
 
 const (
@@ -66,7 +66,7 @@ func main() {
 
 func install() error {
 
-	if err := bootstrap.Run(); err != nil {
+	if err := cmd.Run(); err != nil {
 		log.Panic(err)
 	}
 
