@@ -2,6 +2,8 @@
 node_modules/
 /dist/
 
+bootstrap/
+
 bin/notebook-bin
 frontend/dist/
 data/notebook.db
