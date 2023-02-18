@@ -5,12 +5,13 @@ node_modules/
 bootstrap/
 
 go.sum
+*.sum
 
 bin/notebook-bin
 frontend/dist/
 data/notebook.db
 
-bootstrap
+bootstrap/
 
 !bin/.gitkeep
 !storage/.gitkeep

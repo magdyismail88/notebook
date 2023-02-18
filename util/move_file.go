@@ -33,7 +33,6 @@ func MoveFile(sourcePath, destPath string) error {
 		return fmt.Errorf("Writing to output file failed: %s", err)
 	}
 
-	// The copy was successful, so now delete the original file
 	err = os.Remove(sourcePath)
 
 	if err != nil {
