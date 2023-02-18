@@ -27,14 +27,17 @@ var router Router
 
 func main() {
 
-	fmt.Println("Server started...")
+	msg := `
+	Server listening on 8888
+	`
+	fmt.Println(msg)
 	// r.HandleFunc("/api/notes/{tab_id:[0-9]+}", GetNotesForTab).Methods("GET")
 	// handlerMethods := handlers.CORS(handlers.AllowedOrigins([]string{"*"})
 	handler := cors.Default().Handler(router.All())
 
 	srv := &http.Server{
 		Handler:      handler,
-		Addr:         "localhost:8888",
+		Addr:         ":8888",
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
