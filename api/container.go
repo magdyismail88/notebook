@@ -27,6 +27,7 @@ func (cc *ContainerController) FindAll(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	json.NewEncoder(w).Encode(&containers)
+	return
 }
 
 func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
@@ -40,6 +41,7 @@ func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	json.NewEncoder(w).Encode(&container)
+	return
 }
 
 func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
@@ -53,6 +55,7 @@ func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	io.WriteString(w, `{"success": true}`)
+	return
 }
 
 func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
@@ -71,6 +74,7 @@ func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	io.WriteString(w, `{"success": true}`)
+	return
 }
 
 func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
@@ -89,9 +93,5 @@ func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	io.WriteString(w, `{"success": true}`)
-}
-
-func DestroyContainer() {
-
 	return
 }
