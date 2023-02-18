@@ -28,8 +28,8 @@ func FindAllContainers() ([]*Container, error) {
 	defer database.Close()
 	stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s`", containerTable)
 	res, err := database.Query(stmt)
-	var container Container
 	for res.Next() {
+		var container Container
 		res.Scan(&container.ID, &container.Title)
 		containers = append(containers, &container)
 	}
@@ -70,7 +70,7 @@ func NewContainer(title string) error {
 	return nil
 }
 
-func (c *Container) Update(container *Container) error {
+func (c *Container) Save() error {
 	database, err := sql.Open(DB_ADAPTER, DB_PATH)
 	if err != nil {
 		return err
@@ -81,7 +81,7 @@ func (c *Container) Update(container *Container) error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(&container.Title, &container.ID)
+	_, err = res.Exec(c.Title, c.ID)
 	if err != nil {
 		return err
 	}

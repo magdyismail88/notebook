@@ -23,6 +23,7 @@ func (cc *ContainerController) FindAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	containers, err := models.FindAllContainers()
+
 	if err != nil {
 		panic(err)
 	}
@@ -35,8 +36,8 @@ func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	vars := mux.Vars(r)
-	productId, _ := strconv.ParseInt(vars["productId"], 10, 64)
-	container, err := models.FindContainer(int(productId))
+	containerId, _ := strconv.ParseInt(vars["container_id"], 10, 64)
+	container, err := models.FindContainer(int(containerId))
 	if err != nil {
 		panic(err)
 	}
@@ -69,7 +70,8 @@ func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	err = cc.Container.Update(container)
+	container.Title = form.Title
+	err = container.Save()
 	if err != nil {
 		panic(err)
 	}
