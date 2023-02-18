@@ -1,7 +1,3 @@
-
-
-
-
 exports.flashError = (msg, vm) => {
   setTimeout(() => {
     vm.status = true;

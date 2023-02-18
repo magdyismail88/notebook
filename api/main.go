@@ -29,6 +29,7 @@ func main() {
 
 	msg := `
 	Server listening on 8888
+	http://localhost:8888
 	`
 	fmt.Println(msg)
 	// r.HandleFunc("/api/notes/{tab_id:[0-9]+}", GetNotesForTab).Methods("GET")

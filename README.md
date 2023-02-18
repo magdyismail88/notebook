@@ -37,6 +37,10 @@ or
 $ ./bin/notebook-bin
 ```
 
+```
+localhost:8888
+```
+
 ### Example
 
 ![Screenshot](https://github.com/magdyismail88/notebook/blob/651a9dccc2776d49b47fe0ef07d3b720f2e53038/assets/screenshot01.png?raw=true")
