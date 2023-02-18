@@ -21,7 +21,6 @@
 
 <script>
 	import NoteEditForm from "./NoteEditForm";
-	import NoteShow from "./NoteShow";
 	export default {
 		name: "Note",
 		props: ['note'],
@@ -43,7 +42,6 @@
 		},
 		components: {
 			NoteEditForm,
-			NoteShow
 		},
 		computed: {
 			noteEditFormUniqueID() {
