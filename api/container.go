@@ -1,177 +1,97 @@
 package main
 
 import (
-  "fmt"
-  "database/sql"
-  "encoding/json"
-  "net/http"
-  "io"
-  "github.com/gorilla/mux"
-  _ "github.com/mattn/go-sqlite3"
+	"encoding/json"
+	"io"
+	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
+	"github.com/magdyismail88/notebook/models"
 )
 
-type Container struct {
-    ID int `json:"id"`
-    Title string `json:"title"`
+type ContainerController struct {
+	models.Container
 }
 
-func GetContainers(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Access-Control-Allow-Origin", "*")
-    w.Header().Set("Content-Type", "application/json")
-    w.WriteHeader(http.StatusOK)
-
-    var containers []Container
-
-    database, err := sql.Open(DB_ADAPTER, DB_PATH)
-    defer database.Close()
-
-    if err != nil {
-        panic(err)
-    }
-
-    stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s`", DB_CONTAINERS)
-
-    res, err := database.Query(stmt)
-
-    var container Container
-
-    for res.Next() {
-        res.Scan(&container.ID, &container.Title)
-        containers = append(containers, container)
-    }
-
-    json.NewEncoder(w).Encode(&containers)
-    return
+type containerForm struct {
+	models.Container
 }
 
-func GetContainer(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Access-Control-Allow-Origin", "*")
-    w.Header().Set("Content-Type", "application/json")
-    w.WriteHeader(http.StatusOK)
-
-    vars := mux.Vars(r)
-
-    var container Container
-
-    database, err := sql.Open(DB_ADAPTER, DB_PATH)
-    defer database.Close()
-
-    if err != nil {
-        panic(err)
-    }
-
-    stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s` WHERE id = ?", DB_CONTAINERS)
-
-    res := database.QueryRow(stmt, vars["container_id"])
-
-    if err != nil {
-        panic(err)
-    }
-
-    res.Scan(&container.ID, &container.Title)
-
-    json.NewEncoder(w).Encode(&container)
-    return
+func (cc *ContainerController) FindAll(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	containers, err := models.FindAllContainers()
+	if err != nil {
+		panic(err)
+	}
+	json.NewEncoder(w).Encode(&containers)
 }
 
-func CreateContainer(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Access-Control-Allow-Origin", "*")
-    w.Header().Set("Content-Type", "application/json")
-    w.WriteHeader(http.StatusCreated)
-
-    var container Container
-
-    _ = json.NewDecoder(r.Body).Decode(&container)
-
-    database, err := sql.Open(DB_ADAPTER, DB_PATH)
-    defer database.Close()
-
-    if err != nil {
-        panic(err)
-    }
-
-    stmt := fmt.Sprintf("INSERT INTO `%s` (id, title) VALUES (NULL, ?)", DB_CONTAINERS)
-
-    res, err := database.Prepare(stmt)
-
-    if err != nil {
-        panic(err)
-    }
-
-    _, err = res.Exec(&container.Title)
-
-    if err != nil {
-        panic(err)
-    }
-
-    io.WriteString(w, `{"success": true}`)
-    return
+func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	vars := mux.Vars(r)
+	productId, _ := strconv.ParseInt(vars["productId"], 10, 64)
+	container, err := models.FindContainer(int(productId))
+	if err != nil {
+		panic(err)
+	}
+	json.NewEncoder(w).Encode(&container)
 }
 
-func UpdateContainer(w http.ResponseWriter, r *http.Request) {
-  w.Header().Set("Access-Control-Allow-Origin", "*")
-  w.Header().Set("Content-Type", "application/json")
-  w.WriteHeader(http.StatusNoContent)
-
-  var container Container
-
-  _ = json.NewDecoder(r.Body).Decode(&container)
-
-  database, err := sql.Open(DB_ADAPTER, DB_PATH)
-  defer database.Close()
-
-  if err != nil {
-    panic(err)
-  }
-
-  stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ? WHERE `id` = ?", DB_CONTAINERS)
-
-  res, err := database.Prepare(stmt)
-
-  if err != nil {
-    panic(err)
-  }
-
-  _, err = res.Exec(&container.Title, &container.ID)
-
-  if err != nil {
-    panic(err)
-  }
-
-  io.WriteString(w, `{"success": true}`)
-  return
+func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	var form containerForm
+	_ = json.NewDecoder(r.Body).Decode(&form)
+	err := models.NewContainer(form.Title)
+	if err != nil {
+		panic(err)
+	}
+	io.WriteString(w, `{"success": true}`)
 }
 
-func DestroyContainer(w http.ResponseWriter, r *http.Request) {
-  w.Header().Set("Access-Control-Allow-Origin", "*")
-  w.Header().Set("Content-Type", "application/json")
-  w.WriteHeader(http.StatusNoContent)
+func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
+	var err error
+	var form containerForm
+	_ = json.NewDecoder(r.Body).Decode(&form)
+	container, err := models.FindContainer(form.ID)
+	if err != nil {
+		panic(err)
+	}
+	err = cc.Container.Update(container)
+	if err != nil {
+		panic(err)
+	}
+	io.WriteString(w, `{"success": true}`)
+}
 
-  var container Container
+func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
+	var err error
+	var form containerForm
+	_ = json.NewDecoder(r.Body).Decode(&form)
+	container, err := models.FindContainer(form.ID)
+	if err != nil {
+		panic(err)
+	}
+	err = container.Delete()
+	if err != nil {
+		panic(err)
+	}
+	io.WriteString(w, `{"success": true}`)
+}
 
-  _ = json.NewDecoder(r.Body).Decode(&container)
-  
-  database, err := sql.Open(DB_ADAPTER, DB_PATH)
-  defer database.Close()
+func DestroyContainer() {
 
-  if err != nil {
-    panic(err)
-  }
-
-  stmt := fmt.Sprintf("DELETE FROM `%s` WHERE id = ?", DB_CONTAINERS)
-
-  res, err := database.Prepare(stmt)
-
-  if err != nil {
-    panic(err)
-  }
-
-  _, err = res.Exec(&container.ID)
-
-  if err != nil {
-    panic(err)
-  }
-
-  io.WriteString(w, `{"success": true}`)
-  return
+	return
 }

@@ -8,6 +8,8 @@ import (
 
 type Router struct{}
 
+var containerCtrl ContainerController
+
 func (router *Router) All() *mux.Router {
 	r := mux.NewRouter()
 	r.Use(mux.CORSMethodMiddleware(r))
@@ -24,11 +26,11 @@ func (router *Router) All() *mux.Router {
 
 	// r.Headers("X-Requested-With", "XMLHttpRequest")
 	// Container routes
-	r.HandleFunc("/api/containers", GetContainers).Methods("GET")
-	r.HandleFunc("/api/containers/{container_id}", GetContainer).Methods("GET")
-	r.HandleFunc("/api/containers/create", CreateContainer).Methods("POST")
-	r.HandleFunc("/api/containers/delete", DestroyContainer).Methods("POST")
-	r.HandleFunc("/api/containers/update", UpdateContainer).Methods("POST")
+	r.HandleFunc("/api/containers", containerCtrl.FindAll).Methods("GET")
+	r.HandleFunc("/api/containers/{container_id}", containerCtrl.FindOne).Methods("GET")
+	r.HandleFunc("/api/containers/create", containerCtrl.Create).Methods("POST")
+	r.HandleFunc("/api/containers/update", containerCtrl.Update).Methods("POST")
+	r.HandleFunc("/api/containers/delete", containerCtrl.Destroy).Methods("POST")
 
 	r.HandleFunc("/api/tabs/{container_id}", GetTabs).Methods("GET") // Get all tabs
 	r.HandleFunc("/api/tabs", CreateTab).Methods("POST")             // Create new tab
