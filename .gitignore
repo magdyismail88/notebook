@@ -4,6 +4,8 @@ node_modules/
 
 bootstrap/
 
+go.sum
+
 bin/notebook-bin
 frontend/dist/
 data/notebook.db
