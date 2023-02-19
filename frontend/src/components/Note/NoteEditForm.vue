@@ -3,7 +3,6 @@
 	<div class="container">
 
 		<Flash :status=status :isError=isError :msg=msg />
-
 		
 		<div class="card">
 

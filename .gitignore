@@ -2,10 +2,15 @@
 node_modules/
 /dist/
 
-bootstrap/
+bootstrap/database.go
 
 go.sum
 *.sum
+
+out/
+.env
+.env.example
+cmd/main.go
 
 bin/notebook-bin
 frontend/dist/

@@ -5,8 +5,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-
-	"github.com/magdyismail88/notebook/cmd"
 )
 
 const (
@@ -66,7 +64,7 @@ func main() {
 
 func install() error {
 
-	if err := cmd.Run(); err != nil {
+	if err := Install(); err != nil {
 		log.Panic(err)
 	}
 
