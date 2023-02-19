@@ -25,11 +25,11 @@ The commands are:
 ```
 
 ```bash
-$ go run app.go --build
+$ go run run.go --build
 ```
 
 ```bash
-$ go run app.go --server
+$ go run run.go --server
 ```
 or
 

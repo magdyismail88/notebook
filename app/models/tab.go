@@ -78,7 +78,7 @@ func (t *Tab) Create(title string, containerID int) error {
 	return nil
 }
 
-func (t *Tab) Update(tab Tab) error {
+func (t *Tab) Update(tab *Tab) error {
 	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
 	if err != nil {
 		return err
@@ -90,7 +90,7 @@ func (t *Tab) Update(tab Tab) error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(tab.Title, slug, tab.ContainerID)
+	_, err = res.Exec("HERE", slug, tab.ContainerID)
 	if err != nil {
 		return err
 	}

@@ -5,13 +5,15 @@ import (
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/magdyismail88/notebook/cmd"
 )
 
 const (
 	help = `
 Usage:
 
-	go run app.go [--argument]
+	go run run.go [--argument]
 
 The commands are:
 	--build        build dependencies
@@ -63,24 +65,17 @@ func main() {
 }
 
 func install() error {
-
-	if err := Install(); err != nil {
+	if err := cmd.Install(); err != nil {
 		log.Panic(err)
 	}
-
 	return nil
 }
 
 func run() error {
-
 	a := exec.Command("./bin/notebook-bin")
-
 	log.Print(runServer)
-
 	if err := a.Run(); err != nil {
 		return fmt.Errorf("Server error: %s", err)
 	}
-
 	return nil
-
 }

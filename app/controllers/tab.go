@@ -25,15 +25,12 @@ func (tc *TabController) FindAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-
 	vars := mux.Vars(r)
 	containerID, _ := strconv.ParseInt(vars["container_id"], 10, 64)
 	tabs, err := tc.Tab.FindAll(int(containerID))
-
 	if err != nil {
 		panic(err)
 	}
-
 	json.NewEncoder(w).Encode(&tabs)
 	return
 }
@@ -79,8 +76,8 @@ func (tc *TabController) Update(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	var form tabForm
-	tab.Title = form.Title
 	_ = json.NewDecoder(r.Body).Decode(&form)
+	tab.Title = form.Title
 	err = tc.Tab.Update(tab)
 	if err != nil {
 		panic(err)
@@ -95,11 +92,11 @@ func (tc *TabController) Destroy(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
-	tab, err := tc.Tab.FindOne(int(tabID))
+	_, err := tc.Tab.FindOne(int(tabID))
 	if err != nil {
 		panic(err)
 	}
-	err = tab.Delete(int(tabID))
+	err = tc.Tab.Delete(int(tabID))
 	if err != nil {
 		panic(err)
 	}
