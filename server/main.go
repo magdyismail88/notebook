@@ -12,20 +12,21 @@ import (
 )
 
 func main() {
-
-	fmt.Println(`
-		Server listening on 8888
-		http://localhost:8888
-	`)
-
 	app := bootstrap.App()
 	env := app.Env
+
+	msg := fmt.Sprintf(`
+		Server listening on %s
+		http://localhost:%s
+	`, env.Port, env.Port)
+
+	fmt.Println(msg)
 
 	handler := cors.Default().Handler(routes.Setup(env))
 
 	srv := &http.Server{
 		Handler:      handler,
-		Addr:         ":8888",
+		Addr:         fmt.Sprintf(":%s", env.Port),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}

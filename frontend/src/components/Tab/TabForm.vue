@@ -5,7 +5,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" :id="modalLabelUniqueID">new tab</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <button type="button" id="tab-btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 
@@ -48,7 +48,7 @@
 		},
 		methods: {
 			newTab() {
-				let titleField = (this.title).replace(/\s/g, '');
+				const titleField = (this.title).replace(/\s/g, '');
 
 				if(titleField == "" || titleField == null) {
 					flashError("Fill the title field", this);
@@ -60,6 +60,9 @@
 					this.$store.dispatch('loadTabs');
 					flashSuccess("Created Successfully", this);
 					this.title = '';
+				})
+				.then(() => {
+					document.querySelector('#tab-btn-close').click()
 				})
 				.catch((err) => console.log(err));
 			}

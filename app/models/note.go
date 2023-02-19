@@ -9,12 +9,16 @@ import (
 
 const noteTable = "notes"
 
-type Note struct {
+type NoteEntity struct {
 	ID      int    `json:"id"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
 	TabID   int    `json:"tab_id"`
-	Env     *bootstrap.Env
+}
+
+type Note struct {
+	NoteEntity
+	Env *bootstrap.Env
 }
 
 func NewNote(env *bootstrap.Env) Note {
@@ -90,7 +94,7 @@ func (n *Note) Update(note *Note) error {
 	return nil
 }
 
-func (n *Note) Delete(noteID int) error {
+func (n *Note) Delete(id int) error {
 	database, err := sql.Open(n.Env.DatabaseAdapter, n.Env.DatabaseName)
 	if err != nil {
 		return err
@@ -101,7 +105,7 @@ func (n *Note) Delete(noteID int) error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(noteID)
+	_, err = res.Exec(id)
 	if err != nil {
 		return err
 	}

@@ -17,7 +17,7 @@ type ContainerController struct {
 }
 
 type containerForm struct {
-	models.Container
+	models.ContainerEntity
 }
 
 func (cc *ContainerController) FindAll(w http.ResponseWriter, r *http.Request) {
@@ -60,25 +60,25 @@ func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
-	var err error
-	var form containerForm
-	_ = json.NewDecoder(r.Body).Decode(&form)
-	container, err := cc.Container.FindOne(form.ID)
-	if err != nil {
-		panic(err)
-	}
-	container.Title = form.Title
-	err = container.Save()
-	if err != nil {
-		panic(err)
-	}
-	io.WriteString(w, `{"success": true}`)
-	return
-}
+// func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
+// 	w.Header().Set("Access-Control-Allow-Origin", "*")
+// 	w.Header().Set("Content-Type", "application/json")
+// 	w.WriteHeader(http.StatusNoContent)
+// 	var err error
+// 	var form containerForm
+// 	_ = json.NewDecoder(r.Body).Decode(&form)
+// 	container, err := cc.Container.FindOne(form.ID)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	container.Title = form.Title
+// 	err = container.Save()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	io.WriteString(w, `{"success": true}`)
+// 	return
+// }
 
 func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -87,11 +87,11 @@ func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
 	var err error
 	var form containerForm
 	_ = json.NewDecoder(r.Body).Decode(&form)
-	container, err := cc.Container.FindOne(form.ID)
+	_, err = cc.Container.FindOne(form.ID)
 	if err != nil {
 		panic(err)
 	}
-	err = container.Delete()
+	err = cc.Container.Delete(form.ID)
 	if err != nil {
 		panic(err)
 	}

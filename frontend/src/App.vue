@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import VueFroala from 'vue-froala-wysiwyg';
+// import VueFroala from 'vue-froala-wysiwyg';
 import Header from "./components/partials/Header";
 import Tabs from "./components/Tab/Tabs";
 import ContainerForm from './components/Container/ContainerForm';
@@ -32,6 +32,12 @@ import ContainerEditForm from './components/Container/ContainerEditForm';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      currentContainer: '',
+      currentPath: ''
+    }
+  },
   components: {
     Header,
     Tabs,
@@ -40,9 +46,24 @@ export default {
     ContainerEditForm
   },
   created() {
-    this.$store.dispatch('setDefaultContainer');
-    this.$store.dispatch('loadContainers');
-    this.$store.dispatch('loadTabs');
+    const vm = this
+    this.currentContainer = localStorage.getItem('container')
+    this.currentPath = this.$route.path
+    setTimeout(() => {
+      // vm.$store.dispatch('setDefaultContainer');
+      vm.$store.dispatch('loadContainers');
+      vm.$store.dispatch('loadTabs');
+    }, 1000)
+    document.addEventListener('DOMContentLoaded', function() {
+        // setTimeout(function() {
+        //   vm.$router.push(vm.currentPath)
+        //   // const containerID = JSON.parse(vm.currentContainer).id
+        //   // this.$store.dispatch("changeContainer", containerID)
+        //   // localStorage.setItem('container', vm.currentContainer)
+        //   // vm.$store.dispatch('changeContainer')
+        //   // vm.$store.dispatch('loadTabs');
+        // }, 1000)
+    }, false);
   }
 };
 </script>

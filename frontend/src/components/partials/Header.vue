@@ -88,12 +88,13 @@
     name: "Header",
     methods: {
       deleteCurrentContainer() {
-        let check = confirm("Are you sure ?");
+        const check = confirm("Are you sure ?");
 
         if(check) {
           this.$store.dispatch('deleteContainer')
           .then(() => {
             this.$store.dispatch('loadContainers');
+            this.$store.dispatch('setDefaultContainer')
             this.$store.dispatch('changeContainer', 0);
             this.$router.push('/');
           })

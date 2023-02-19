@@ -10,10 +10,14 @@ import (
 
 const containerTable = "containers"
 
-type Container struct {
+type ContainerEntity struct {
 	ID    int    `json:"id"`
 	Title string `json:"title"`
-	Env   *bootstrap.Env
+}
+
+type Container struct {
+	ContainerEntity
+	Env *bootstrap.Env
 }
 
 func NewContainer(env *bootstrap.Env) Container {
@@ -71,25 +75,25 @@ func (c *Container) Create(title string) error {
 	return nil
 }
 
-func (c *Container) Save() error {
-	database, err := sql.Open(c.Env.DatabaseAdapter, c.Env.DatabaseName)
-	if err != nil {
-		return err
-	}
-	defer database.Close()
-	stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ? WHERE `id` = ?", containerTable)
-	res, err := database.Prepare(stmt)
-	if err != nil {
-		return err
-	}
-	_, err = res.Exec(c.Title, c.ID)
-	if err != nil {
-		return err
-	}
-	return nil
-}
+// func (c *Container) Save() error {
+// 	database, err := sql.Open(c.Env.DatabaseAdapter, c.Env.DatabaseName)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	defer database.Close()
+// 	stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ? WHERE `id` = ?", containerTable)
+// 	res, err := database.Prepare(stmt)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	_, err = res.Exec(c.Title, c.ID)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }
 
-func (c *Container) Delete() error {
+func (c *Container) Delete(id int) error {
 	database, err := sql.Open(c.Env.DatabaseAdapter, c.Env.DatabaseName)
 	if err != nil {
 		return err
@@ -100,7 +104,7 @@ func (c *Container) Delete() error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(c.ID)
+	_, err = res.Exec(id)
 	if err != nil {
 		return err
 	}

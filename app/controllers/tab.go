@@ -18,7 +18,7 @@ type TabController struct {
 }
 
 type tabForm struct {
-	models.Tab
+	models.TabEntity
 }
 
 func (tc *TabController) FindAll(w http.ResponseWriter, r *http.Request) {
@@ -71,15 +71,14 @@ func (tc *TabController) Update(w http.ResponseWriter, r *http.Request) {
 	// tab_id
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
-	_, err := tc.Tab.FindOne(int(tabID))
+	tab, err := tc.Tab.FindOne(int(tabID))
 	if err != nil {
 		panic(err)
 	}
 	var form tabForm
 	_ = json.NewDecoder(r.Body).Decode(&form)
-	tab := models.Tab{}
 	tab.Title = form.Title
-	err = tc.Tab.Update(&tab)
+	err = tc.Tab.Update(tab)
 	if err != nil {
 		panic(err)
 	}
@@ -91,6 +90,7 @@ func (tc *TabController) Destroy(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNoContent)
+
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
 	_, err := tc.Tab.FindOne(int(tabID))

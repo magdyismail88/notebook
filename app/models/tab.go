@@ -11,12 +11,16 @@ import (
 
 const tabTable = "tabs"
 
-type Tab struct {
+type TabEntity struct {
 	ID          int    `json:"id"`
 	Title       string `json:"title"`
 	Slug        string `json:"slug"`
 	ContainerID int    `json:"container_id"`
-	Env         *bootstrap.Env
+}
+
+type Tab struct {
+	TabEntity
+	Env *bootstrap.Env
 }
 
 func NewTab(env *bootstrap.Env) Tab {
@@ -45,7 +49,7 @@ func (t *Tab) FindAll(containerID int) ([]*Tab, error) {
 
 func (t *Tab) FindOne(tabID int) (*Tab, error) {
 	var tab Tab
-	database, err := sql.Open(DB_ADAPTER, DB_PATH)
+	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
 	if err != nil {
 		return nil, err
 	}
@@ -90,14 +94,14 @@ func (t *Tab) Update(tab *Tab) error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(tab.Title, slug, tab.ContainerID)
+	_, err = res.Exec(tab.Title, slug, tab.ID)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *Tab) Delete(tabID int) error {
+func (t *Tab) Delete(id int) error {
 	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
 	if err != nil {
 		return err
@@ -119,7 +123,7 @@ func (t *Tab) Delete(tabID int) error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(t.ID)
+	_, err = res.Exec(id)
 	if err != nil {
 		return err
 	}

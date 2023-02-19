@@ -4,7 +4,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="containerModalLabel">new container</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <button type="button" id="container-btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 
@@ -52,7 +52,7 @@
 
 				// alert('Demo');
 
-				let titleField = (this.title).replace(/\s/g, '');
+				const titleField = (this.title).replace(/\s/g, '');
 
 				if(titleField == null || titleField == "") {
 					flashError("Fill the title field", this);
@@ -64,6 +64,9 @@
 					this.title = '';
 					flashSuccess("Success Created!", this);
 					this.$store.dispatch('loadContainers');
+				})
+				.then(() => {
+					document.querySelector('#container-btn-close').click()
 				})
 				.catch((err) => {
 					console.log(err);

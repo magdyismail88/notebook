@@ -41,7 +41,7 @@ func Setup(env *bootstrap.Env) *mux.Router {
 	r.HandleFunc("/api/containers", containerCtrl.FindAll).Methods("GET")
 	r.HandleFunc("/api/containers/{container_id}", containerCtrl.FindOne).Methods("GET")
 	r.HandleFunc("/api/containers/create", containerCtrl.Create).Methods("POST")
-	r.HandleFunc("/api/containers/update", containerCtrl.Update).Methods("POST")
+	// r.HandleFunc("/api/containers/update", containerCtrl.Update).Methods("POST")
 	r.HandleFunc("/api/containers/delete", containerCtrl.Destroy).Methods("POST")
 
 	r.HandleFunc("/api/tabs/{container_id}", tabCtrl.FindAll).Methods("GET") // Get all tabs

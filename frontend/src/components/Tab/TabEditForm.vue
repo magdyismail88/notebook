@@ -4,7 +4,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" :id="modalLabelUniqueID">edit tab</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <button type="button" id="tab-edit-btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 
@@ -13,7 +13,7 @@
 	        <form>
 	          <div class="mb-3">
 	            <label :for="titleUniqueID" class="col-form-label">title: </label>
-	            <input type="text" class="form-control" id="titleUniqueID" 
+	            <input type="text" class="form-control" :id="titleUniqueID" 
 	            v-model="t.title">
 	          </div>
 	        </form>
@@ -36,6 +36,11 @@
 	export default {
 		name: 'TabEditForm',
 		props: ['t'],
+		mounted() {
+			// setTimeout(() => {
+			// 	this.title = this.t.title
+			// }, 3000)
+		},
 		data() {
 			return {
 				msg: '',
@@ -49,7 +54,7 @@
 		methods: {
 			updatingTab() {
 
-				let titleField = (this.t.title).replace(/\s/g, '');
+				const titleField = (this.t.title).replace(/\s/g, '');
 
 				if(titleField == "" || titleField == null) {
 					flashError("Fill the title field", this);
@@ -57,11 +62,15 @@
 				}
 
 				this.$store.dispatch('updateTab', this.t)
-				.then(() => {
-					this.$store.dispatch('loadTabs');
-					flashSuccess("Updated Successfully", this);
-				})
-				.catch((err) => console.log(err));
+					.then(() => {
+						// this.t.title = this.title
+						this.$store.dispatch('loadTabs');
+						flashSuccess("Updated Successfully", this);
+					})
+					.then(() => {
+						document.querySelector('#tab-edit-btn-close').click();
+					})
+					.catch((err) => console.log(err));
 			}
 		},
 		computed: {

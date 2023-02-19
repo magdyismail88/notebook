@@ -16,7 +16,7 @@ type NoteController struct {
 	Env  *bootstrap.Env
 }
 type noteForm struct {
-	models.Note
+	models.NoteEntity
 }
 
 func (nc *NoteController) FindAll(w http.ResponseWriter, r *http.Request) {

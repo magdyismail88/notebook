@@ -41,6 +41,10 @@ const actions = {
 			});
 		});
 	},
+	setContainer: ({commit}, container) => {
+		commit('SET_CONTAINER', container);
+		localStorage.setItem('container', container);
+	},
 	changeContainer: ({commit, state}, container_id) => {
 		if(container_id == 0) {
 			commit('SET_CONTAINER', state.defaultContainer);
