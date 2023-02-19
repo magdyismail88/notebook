@@ -71,14 +71,15 @@ func (tc *TabController) Update(w http.ResponseWriter, r *http.Request) {
 	// tab_id
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
-	tab, err := tc.Tab.FindOne(int(tabID))
+	_, err := tc.Tab.FindOne(int(tabID))
 	if err != nil {
 		panic(err)
 	}
 	var form tabForm
 	_ = json.NewDecoder(r.Body).Decode(&form)
+	tab := models.Tab{}
 	tab.Title = form.Title
-	err = tc.Tab.Update(tab)
+	err = tc.Tab.Update(&tab)
 	if err != nil {
 		panic(err)
 	}

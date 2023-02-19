@@ -17,8 +17,8 @@ type Note struct {
 	Env     *bootstrap.Env
 }
 
-func NewNote(env *bootstrap.Env) *Note {
-	return &Note{Env: env}
+func NewNote(env *bootstrap.Env) Note {
+	return Note{Env: env}
 }
 
 func (n *Note) FindAll(tabID int) ([]*Note, error) {
@@ -91,7 +91,6 @@ func (n *Note) Update(note *Note) error {
 }
 
 func (n *Note) Delete(noteID int) error {
-	fmt.Println(n.Env.DatabaseAdapter)
 	database, err := sql.Open(n.Env.DatabaseAdapter, n.Env.DatabaseName)
 	if err != nil {
 		return err

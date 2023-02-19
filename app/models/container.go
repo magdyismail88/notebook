@@ -16,8 +16,8 @@ type Container struct {
 	Env   *bootstrap.Env
 }
 
-func NewContainer(env *bootstrap.Env) *Container {
-	return &Container{Env: env}
+func NewContainer(env *bootstrap.Env) Container {
+	return Container{Env: env}
 }
 
 func (c *Container) FindAll() ([]*Container, error) {

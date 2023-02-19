@@ -11,15 +11,15 @@ import (
 
 func Setup(env *bootstrap.Env) *mux.Router {
 	containerCtrl := &controllers.ContainerController{
-		Container: *models.NewContainer(env),
+		Container: models.NewContainer(env),
 		Env:       env,
 	}
 	tabCtrl := &controllers.TabController{
-		Tab: *models.NewTab(env),
+		Tab: models.NewTab(env),
 		Env: env,
 	}
 	noteCtrl := &controllers.NoteController{
-		Note: *models.NewNote(env),
+		Note: models.NewNote(env),
 		Env:  env,
 	}
 

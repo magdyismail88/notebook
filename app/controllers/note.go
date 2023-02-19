@@ -89,11 +89,11 @@ func (nc *NoteController) Destroy(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 	vars := mux.Vars(r)
 	noteID, _ := strconv.ParseInt(vars["note_id"], 10, 64)
-	note, err := nc.Note.FindOne(int(noteID))
+	_, err := nc.Note.FindOne(int(noteID))
 	if err != nil {
 		panic(err)
 	}
-	err = note.Delete(int(noteID))
+	err = nc.Note.Delete(int(noteID))
 	if err != nil {
 		panic(err)
 	}

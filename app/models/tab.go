@@ -19,8 +19,8 @@ type Tab struct {
 	Env         *bootstrap.Env
 }
 
-func NewTab(env *bootstrap.Env) *Tab {
-	return &Tab{Env: env}
+func NewTab(env *bootstrap.Env) Tab {
+	return Tab{Env: env}
 }
 
 func (t *Tab) FindAll(containerID int) ([]*Tab, error) {
@@ -90,7 +90,7 @@ func (t *Tab) Update(tab *Tab) error {
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec("HERE", slug, tab.ContainerID)
+	_, err = res.Exec(tab.Title, slug, tab.ContainerID)
 	if err != nil {
 		return err
 	}
