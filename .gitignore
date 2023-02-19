@@ -7,16 +7,10 @@ bootstrap/database.go
 go.sum
 *.sum
 
-out/
-.env
-.env.example
-cmd/main.go
 
 bin/notebook-bin
 frontend/dist/
 data/notebook.db
-
-bootstrap/
 
 !bin/.gitkeep
 !storage/.gitkeep
