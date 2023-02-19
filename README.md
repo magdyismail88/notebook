@@ -11,7 +11,7 @@ Simple notebook application written with golang, vue and Sqlite3 for more portab
 
 
 ```bash
-$ go run app.go --help
+$ go run run.go --help
 ```
 
 ```bash
