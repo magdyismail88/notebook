@@ -4,6 +4,7 @@ node_modules/
 
 bootstrap/database.go
 
+.env
 go.sum
 *.sum
 

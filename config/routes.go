@@ -57,6 +57,7 @@ func Setup(env *bootstrap.Env) *mux.Router {
 	r.HandleFunc("/api/notes/{note_id}/update", noteCtrl.Update).Methods("POST")
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./frontend/dist")))
+	// r.PathPrefix("/tab/[0-9]+").Handler(http.FileServer(http.Dir("./frontend/dist")))
 
 	uploader := controllers.Uploader{}
 
