@@ -61,14 +61,12 @@ localhost:8888
 │       ├── container.go
 │       ├── note.go
 │       └── tab.go
-├── app.go
 ├── bin
 ├── bootstrap
 │   ├── app.go
-│   ├── database.go
 │   └── env.go
 ├── cmd
-│   └── main.go
+│   └── install.go
 ├── config
 │   └── routes.go
 ├── data
@@ -80,13 +78,15 @@ localhost:8888
 │   ├── note.go
 │   └── tab.go
 ├── frontend
+├── server
+├── storage
+├── tests
 ├── go.mod
 ├── go.sum
 ├── install.go
 ├── LICENSE
 ├── README.md
-├── storage
-├── tests
+├── run.go
 └── util
     └── move_file.go
 ```
