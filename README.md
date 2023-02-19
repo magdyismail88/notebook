@@ -89,6 +89,4 @@ localhost:8888
 ├── tests
 └── util
     └── move_file.go
-
-36 directories, 78 files
 ```
