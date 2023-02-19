@@ -50,19 +50,27 @@ localhost:8888
 
 ```
 .
-├── api
-│   ├── constants.go
-│   ├── container.go
-│   ├── main.go
-│   ├── note.go
-│   ├── router.go
-│   ├── tab.go
-│   └── uploader.go
+├── app
+│   ├── controllers
+│   │   ├── container.go
+│   │   ├── note.go
+│   │   ├── tab.go
+│   │   └── uploader.go
+│   └── models
+│       ├── constants.go
+│       ├── container.go
+│       ├── note.go
+│       └── tab.go
 ├── app.go
 ├── bin
-│   └── notebook-bin
+├── bootstrap
+│   ├── app.go
+│   ├── database.go
+│   └── env.go
 ├── cmd
-│   └── install.go
+│   └── main.go
+├── config
+│   └── routes.go
 ├── data
 │   └── notebook.db
 ├── database
@@ -74,11 +82,13 @@ localhost:8888
 ├── frontend
 ├── go.mod
 ├── go.sum
+├── install.go
 ├── LICENSE
 ├── README.md
 ├── storage
 ├── tests
-│   └── demo_test.go
 └── util
     └── move_file.go
+
+36 directories, 78 files
 ```
