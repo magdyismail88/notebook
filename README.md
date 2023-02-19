@@ -79,6 +79,7 @@ localhost:8888
 │   └── tab.go
 ├── frontend
 ├── server
+│   └── main.db
 ├── storage
 ├── tests
 ├── go.mod
