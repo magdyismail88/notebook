@@ -56,6 +56,11 @@ localhost:8888
 │   │   ├── note.go
 │   │   ├── tab.go
 │   │   └── uploader.go
+│	├── services
+│   │   ├── container.go
+│   │   ├── note.go
+│   │   ├── tab.go
+│   │   └── uploader.go
 │   └── models
 │       ├── constants.go
 │       ├── container.go
@@ -68,7 +73,8 @@ localhost:8888
 ├── cmd
 │   └── install.go
 ├── config
-│   └── routes.go
+└── v1
+│	└──  routes.go
 ├── data
 │   └── notebook.db
 ├── database
