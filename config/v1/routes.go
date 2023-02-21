@@ -5,22 +5,24 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/magdyismail88/notebook/app/controllers"
-	"github.com/magdyismail88/notebook/app/models"
+	"github.com/magdyismail88/notebook/app/services"
 	"github.com/magdyismail88/notebook/bootstrap"
 )
 
 func Setup(env *bootstrap.Env) *mux.Router {
 	containerCtrl := &controllers.ContainerController{
-		Container: models.NewContainer(env),
-		Env:       env,
+		ContainerService: services.NewContainerService(env),
+		Env:              env,
 	}
+
 	tabCtrl := &controllers.TabController{
-		Tab: models.NewTab(env),
-		Env: env,
+		TabService: services.NewTabService(env),
+		Env:        env,
 	}
+
 	noteCtrl := &controllers.NoteController{
-		Note: models.NewNote(env),
-		Env:  env,
+		NoteService: services.NewNoteService(env),
+		Env:         env,
 	}
 
 	r := mux.NewRouter()
