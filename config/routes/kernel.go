@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/magdyismail88/notebook/app/controllers/v1"
+	"github.com/magdyismail88/notebook/app/controllers"
 	"github.com/magdyismail88/notebook/app/services"
 	"github.com/magdyismail88/notebook/bootstrap"
 )

@@ -77,7 +77,7 @@
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',
-			        imageUploadURL: 'http://localhost:8888/api/v1/upload',
+			        imageUploadURL: 'http://localhost:8888/api/upload',
 			        tableInsertHelper: true,
 			        fileUpload: true,
 			        colorsHEXInput: true,
