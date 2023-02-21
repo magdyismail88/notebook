@@ -72,8 +72,10 @@ localhost:8888
 ├── cmd
 │   └── install.go
 ├── config
-│   └── v1
-│       └── routes.go
+│   └── routes
+│       ├── api.go
+│       ├── kernel.go
+│       └── web.go
 ├── data
 ├── database
 │   ├── constants.go
@@ -81,7 +83,6 @@ localhost:8888
 │   ├── migration.go
 │   ├── note.go
 │   └── tab.go
-├── frontend
 ├── go.mod
 ├── go.sum
 ├── LICENSE
@@ -90,6 +91,7 @@ localhost:8888
 ├── server
 │   └── main.go
 ├── storage
+│   └── upload_image.png
 ├── tests
 └── util
     └── move_file.go
