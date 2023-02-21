@@ -56,27 +56,25 @@ localhost:8888
 │   │   ├── note.go
 │   │   ├── tab.go
 │   │   └── uploader.go
-│	├── services
+│   ├── models
 │   │   ├── container.go
 │   │   ├── note.go
-│   │   ├── tab.go
-│   │   └── uploader.go
-│   └── models
-│       ├── constants.go
+│   │   └── tab.go
+│   └── services
 │       ├── container.go
 │       ├── note.go
 │       └── tab.go
 ├── bin
 ├── bootstrap
 │   ├── app.go
+│   ├── database.go
 │   └── env.go
 ├── cmd
 │   └── install.go
 ├── config
-└── v1
-│	└──  routes.go
+│   └── v1
+│       └── routes.go
 ├── data
-│   └── notebook.db
 ├── database
 │   ├── constants.go
 │   ├── container.go
@@ -84,16 +82,15 @@ localhost:8888
 │   ├── note.go
 │   └── tab.go
 ├── frontend
-├── server
-│   └── main.db
-├── storage
-├── tests
 ├── go.mod
 ├── go.sum
-├── install.go
 ├── LICENSE
 ├── README.md
 ├── run.go
+├── server
+│   └── main.go
+├── storage
+├── tests
 └── util
     └── move_file.go
 ```
