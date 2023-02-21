@@ -52,6 +52,7 @@ localhost:8888
 .
 ├── app
 │   ├── controllers
+│   │   ├── application.go
 │   │   ├── container.go
 │   │   ├── note.go
 │   │   ├── tab.go

@@ -23,7 +23,7 @@ const getters = {
 const actions = {
 	loadNotes: ({commit}, tab_id) => {
 		return new Promise((resolve, reject) => {
-			axios.get('http://localhost:8888/api/notes/' + tab_id)
+			axios.get('http://localhost:8888/api/v1/notes/' + tab_id)
 			.then((res) => {
 				commit('SET_NOTES', res.data);
 				resolve(res);
@@ -36,7 +36,7 @@ const actions = {
 	},
 	loadNote: ({commit}, note_id) => {
 		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/notes/${note_id}/show`)
+			axios.get(`http://localhost:8888/api/v1/notes/${note_id}/show`)
 			.then((res) => {
 				commit('SET_NOTE', res.data);
 				resolve(res);
@@ -49,7 +49,7 @@ const actions = {
 	},
 	createNote: ({commit, state, getters}, data) => {
 		return new Promise((resolve, reject) => {
-			axios.post('http://localhost:8888/api/notes', {
+			axios.post('http://localhost:8888/api/v1/notes', {
 				// data: qs.stringify(data)
 				title: data.title,
 				content: data.content,
@@ -67,7 +67,7 @@ const actions = {
 	destroyNote: ({commit}, note_id) => {
 
 		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/notes/${note_id}/delete`)
+			axios.get(`http://localhost:8888/api/v1/notes/${note_id}/delete`)
 			.then((res) => {
 				resolve(res);
 			})
@@ -79,7 +79,7 @@ const actions = {
 	},
 	updateNote: ({commit}, data) => {
 		return new Promise((resolve, reject) => {
-			axios.post(`http://localhost:8888/api/notes/${data.id}/update`, {
+			axios.post(`http://localhost:8888/api/v1/notes/${data.id}/update`, {
 				title: data.title,
 				content: data.content,
 				id: data.id,

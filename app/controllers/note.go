@@ -21,9 +21,7 @@ type noteForm struct {
 }
 
 func (nc *NoteController) FindAll(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	writeHeader(w, http.StatusOK)
 
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
@@ -38,9 +36,7 @@ func (nc *NoteController) FindAll(w http.ResponseWriter, r *http.Request) {
 }
 
 func (nc *NoteController) FindOne(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	writeHeader(w, http.StatusOK)
 
 	vars := mux.Vars(r)
 	noteID, _ := strconv.ParseInt(vars["note_id"], 10, 64)
@@ -55,9 +51,7 @@ func (nc *NoteController) FindOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func (nc *NoteController) Create(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
+	writeHeader(w, http.StatusCreated)
 
 	var form noteForm
 	_ = json.NewDecoder(r.Body).Decode(&form)
@@ -72,9 +66,7 @@ func (nc *NoteController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (nc *NoteController) Update(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
+	writeHeader(w, http.StatusNoContent)
 
 	vars := mux.Vars(r)
 	noteID, _ := strconv.ParseInt(vars["note_id"], 10, 64)
@@ -99,9 +91,7 @@ func (nc *NoteController) Update(w http.ResponseWriter, r *http.Request) {
 }
 
 func (nc *NoteController) Destroy(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
+	writeHeader(w, http.StatusNoContent)
 
 	vars := mux.Vars(r)
 	noteID, _ := strconv.ParseInt(vars["note_id"], 10, 64)

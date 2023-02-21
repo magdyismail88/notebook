@@ -8,7 +8,6 @@ bootstrap/database.go
 go.sum
 *.sum
 
-
 bin/notebook-bin
 frontend/dist/
 data/notebook.db
@@ -16,6 +15,7 @@ data/notebook.db
 !bin/.gitkeep
 !storage/.gitkeep
 !data/.gitkeep
+storage/
 
 npm-debug.log*
 yarn-debug.log*

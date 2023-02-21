@@ -10,6 +10,7 @@ type Env struct {
 	DatabaseAdapter string `mapstructure:"DB_ADAPTER"`
 	DatabaseName    string `mapstructure:"DB_NAME"`
 	Port            string `mapstructure:"PORT"`
+	StoragePath     string `mapstructure:"STORAGE_PATH"`
 }
 
 func NewEnv() *Env {

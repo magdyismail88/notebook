@@ -26,7 +26,6 @@
 					</div>
 
 					<div class="form-group mt-4">
-
 						<froala :tag="'textarea'"
 							:config="config"
 							v-model="note.content">		
@@ -82,7 +81,7 @@
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',
-			        imageUploadURL: 'http://localhost:8000/api/upload',
+			        imageUploadURL: 'http://localhost:8888/api/v1/upload',
 			        tableInsertHelper: true,
 			        fileUpload: true,
 			        colorsHEXInput: true,
@@ -102,9 +101,8 @@
 		},
 		methods: {
 			updatingNote() {
-
-				let titleField = (this.note.title).replace(/\s/g, '');
-				let contentField = (this.note.content).replace(/\s/g, '');
+				const titleField = (this.note.title).replace(/\s/g, '');
+				const contentField = (this.note.content).replace(/\s/g, '');
 
 				// Validation Section
 

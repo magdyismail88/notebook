@@ -77,7 +77,7 @@
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',
-			        imageUploadURL: 'http://localhost:8000/api/upload',
+			        imageUploadURL: 'http://localhost:8888/api/v1/upload',
 			        tableInsertHelper: true,
 			        fileUpload: true,
 			        colorsHEXInput: true,
@@ -100,8 +100,8 @@
 		methods: {
 			newNote() {
 
-				let titleField = (this.title).replace(/\s/g, '');
-				let contentField = (this.content).replace(/\s/g, '');
+				const titleField = (this.title).replace(/\s/g, '');
+				const contentField = (this.content).replace(/\s/g, '');
 
 				// Validation Section
 
@@ -152,7 +152,6 @@
 			
 		},
 		computed: {
-
 			currentTabID() {
 				return this.$store.state.tab.tab.id;
 			},

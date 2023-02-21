@@ -21,10 +21,8 @@ type containerForm struct {
 	models.Container
 }
 
-func (cc *ContainerController) FindAll(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+func (cc *ContainerController) FindAll(w http.ResponseWriter, _ *http.Request) {
+	writeHeader(w, http.StatusOK)
 
 	containers, err := cc.ContainerService.FindAll()
 
@@ -37,9 +35,7 @@ func (cc *ContainerController) FindAll(w http.ResponseWriter, r *http.Request) {
 }
 
 func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	writeHeader(w, http.StatusOK)
 
 	vars := mux.Vars(r)
 	containerID, _ := strconv.ParseInt(vars["container_id"], 10, 64)
@@ -54,9 +50,7 @@ func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
+	writeHeader(w, http.StatusCreated)
 
 	var form containerForm
 	_ = json.NewDecoder(r.Body).Decode(&form)
@@ -71,9 +65,7 @@ func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
+	writeHeader(w, http.StatusNoContent)
 
 	var err error
 	var form containerForm

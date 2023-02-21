@@ -23,9 +23,7 @@ type tabForm struct {
 }
 
 func (tc *TabController) FindAll(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	writeHeader(w, http.StatusOK)
 
 	vars := mux.Vars(r)
 	containerID, _ := strconv.ParseInt(vars["container_id"], 10, 64)
@@ -40,9 +38,7 @@ func (tc *TabController) FindAll(w http.ResponseWriter, r *http.Request) {
 }
 
 func (tc *TabController) FindOne(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	writeHeader(w, http.StatusOK)
 	// Get tab id
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
@@ -57,9 +53,7 @@ func (tc *TabController) FindOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func (tc *TabController) Create(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
+	writeHeader(w, http.StatusCreated)
 
 	var form tabForm
 	_ = json.NewDecoder(r.Body).Decode(&form)
@@ -74,9 +68,7 @@ func (tc *TabController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (tc *TabController) Update(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
+	writeHeader(w, http.StatusNoContent)
 	// tab_id
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
@@ -100,9 +92,7 @@ func (tc *TabController) Update(w http.ResponseWriter, r *http.Request) {
 }
 
 func (tc *TabController) Destroy(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
+	writeHeader(w, http.StatusNoContent)
 
 	vars := mux.Vars(r)
 	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)

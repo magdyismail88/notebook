@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path"
 
 	"github.com/magdyismail88/notebook/bootstrap"
 )
@@ -15,15 +16,15 @@ type Uploader struct {
 }
 
 func (u *Uploader) Upload(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	defer w.WriteHeader(http.StatusOK)
+	writeHeader(w, http.StatusOK)
 
 	file, handler, err := r.FormFile("file")
 
 	// fileName := r.FormValue("file_name")
 
-	fileURL := fmt.Sprint("http://localhost:8000/storage/", handler.Filename)
+	fileURL := fmt.Sprintf(
+		"http://localhost:%s/%s/%s", u.Env.Port, u.Env.StoragePath, handler.Filename,
+	)
 
 	// json.NewEncoder(w).Encode(map[string]string{"link": fileURL})
 
@@ -35,7 +36,7 @@ func (u *Uploader) Upload(w http.ResponseWriter, r *http.Request) {
 
 	defer file.Close()
 
-	f, err := os.OpenFile("storage/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+	f, err := os.OpenFile(path.Join(u.Env.StoragePath, handler.Filename), os.O_WRONLY|os.O_CREATE, 0666)
 
 	if err != nil {
 		panic(err)
