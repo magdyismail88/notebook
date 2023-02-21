@@ -15,6 +15,10 @@ type Uploader struct {
 	Env *bootstrap.Env
 }
 
+func NewUploadController(env *bootstrap.Env) *Uploader {
+	return &Uploader{Env: env}
+}
+
 func (u *Uploader) Upload(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusOK)
 

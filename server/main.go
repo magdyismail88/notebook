@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/magdyismail88/notebook/bootstrap"
-	routes "github.com/magdyismail88/notebook/config/v1"
+	"github.com/magdyismail88/notebook/config/routes"
 	"github.com/rs/cors"
 )
 
