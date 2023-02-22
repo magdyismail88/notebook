@@ -15,7 +15,7 @@
 						</a>
 					</td>
 					<td>
-						<router-link to="/note/new">
+						<router-link to="/note/new" style="width: 100px;" class="btn btn-sm text-primary border-primary rounded-pill shadow-sm">
 							<i class="bi bi-plus-square-dotted"></i> Add Note
 						</router-link>
 					</td>

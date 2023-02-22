@@ -3,7 +3,7 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" :id="modalLabelUniqueID">edit tab</h5>
+	        <h5 class="modal-title" :id="modalLabelUniqueID">Edit Tab</h5>
 	        <button type="button" id="tab-edit-btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">

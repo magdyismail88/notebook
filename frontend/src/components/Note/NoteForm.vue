@@ -4,16 +4,15 @@
 
 		<Flash :status=status :isError=isError :msg=msg />
 		
-		<div class="card">
+		<div class="card shadow-sm">
 
 			<div class="card-header">
 				<div class="modal-header">
-			        <h5 class="modal-title" id="ddd">new note</h5>
+			        <h5 class="modal-title" id="ddd">New Note</h5>
 			        <button type="button"
-
-			        		class="btn-close" 
-			        		aria-label="Close"
-			        	    @click="backToParentTab"></button>
+						class="btn-close" 
+						aria-label="Close"
+						@click="backToParentTab"></button>
 	     		</div>
 			</div>
 

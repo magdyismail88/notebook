@@ -1,6 +1,6 @@
 <template>
 	<div id="note" class="col-3 mt-4" style="margin-top: 36px !important;">
-		<div style="background-color:#fdcb6e;">
+		<div style="background-color:#fdcb6e;" class="shadow-sm">
 			<div class="card-header d-flex justify-content-between">
 				{{ note.title | short }} <a href="#" @click="removeNote" class="ml-auto float-right">&times;</a>
 			</div>

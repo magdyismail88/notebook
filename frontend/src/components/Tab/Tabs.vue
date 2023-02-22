@@ -1,8 +1,8 @@
 <template>
 	<div class="tabs">
 		<a href="#"
-		   style="margin-left: 5px;"
-           class="nav-link"
+		   style="margin-left: -14px; width:246px;"
+           class="nav-link border-start-0 btn text-primary border-primary rounded-pill shadow-sm"
            data-bs-toggle="modal"
            data-bs-target="#tabModal"
            data-bs-whatever="@getbootstrap">
@@ -10,15 +10,14 @@
         </a>
 		<hr class="border border-primary border-1 opacity-75">
 
-		
-
 		<ul class="list-group">
 	      	<router-link 
 	      		v-for="tab in getTabs"
-	            class="nav-link"
+				style="margin-left: -14px"
+	            class="nav-link border-start-0 rounded"
 	            :to="{name: 'Tab', params: {id: tab.id} }"
 	            v-bind:key="tab.id">
-	            <li class="list-group-item" style="width: 100%;">
+	            <li class="list-group-item shadow-sm" style="width: 100%;">
 					<p style="padding: 5px;  margin: 0;">{{ tab.title }}&nbsp; </p>
 				</li>
 	            

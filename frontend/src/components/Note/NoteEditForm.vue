@@ -4,7 +4,7 @@
 
 		<Flash :status=status :isError=isError :msg=msg />
 		
-		<div class="card">
+		<div class="card shadow-sm">
 
 			<div class="card-header">
 				<div class="modal-header">
