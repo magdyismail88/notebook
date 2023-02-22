@@ -14,6 +14,8 @@ import (
 func main() {
 	app := bootstrap.App()
 	env := app.Env
+	db := app.DBConn
+	defer app.CloseDBConnection()
 
 	msg := fmt.Sprintf(`
 		Server listening on %s
@@ -22,7 +24,7 @@ func main() {
 
 	fmt.Println(msg)
 
-	handler := cors.Default().Handler(routes.Setup(env))
+	handler := cors.Default().Handler(routes.Setup(db, env))
 
 	srv := &http.Server{
 		Handler:      handler,

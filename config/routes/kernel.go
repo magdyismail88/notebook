@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"database/sql"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -16,19 +17,19 @@ type kernel struct {
 	UploaderCtrl  *controllers.Uploader
 }
 
-func Setup(env *bootstrap.Env) *mux.Router {
+func Setup(db *sql.DB, env *bootstrap.Env) *mux.Router {
 	containerCtrl := &controllers.ContainerController{
-		ContainerService: services.NewContainerService(env),
+		ContainerService: services.NewContainerService(db, env),
 		Env:              env,
 	}
 
 	tabCtrl := &controllers.TabController{
-		TabService: services.NewTabService(env),
+		TabService: services.NewTabService(db, env),
 		Env:        env,
 	}
 
 	noteCtrl := &controllers.NoteController{
-		NoteService: services.NewNoteService(env),
+		NoteService: services.NewNoteService(db, env),
 		Env:         env,
 	}
 

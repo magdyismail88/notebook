@@ -15,7 +15,9 @@ data/notebook.db
 !bin/.gitkeep
 !storage/.gitkeep
 !data/.gitkeep
-storage/
+public/storage/
+
+config/database/
 
 npm-debug.log*
 yarn-debug.log*

@@ -10,24 +10,23 @@ import (
 )
 
 type ContainerService struct {
+	db  *sql.DB
 	Env *bootstrap.Env
 }
 
-func NewContainerService(env *bootstrap.Env) ContainerService {
-	return ContainerService{Env: env}
+func NewContainerService(db *sql.DB, env *bootstrap.Env) ContainerService {
+	return ContainerService{db: db, Env: env}
 }
 
 func (cs *ContainerService) FindAll() ([]*models.Container, error) {
 	var containers []*models.Container
 
-	database, err := sql.Open(cs.Env.DatabaseAdapter, cs.Env.DatabaseName)
+	stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s`", models.ContainerTable)
+	res, err := cs.db.Query(stmt)
+
 	if err != nil {
 		return nil, err
 	}
-	defer database.Close()
-
-	stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s`", models.ContainerTable)
-	res, err := database.Query(stmt)
 
 	for res.Next() {
 		var container models.Container
@@ -41,18 +40,8 @@ func (cs *ContainerService) FindAll() ([]*models.Container, error) {
 func (cs *ContainerService) FindOne(id int) (*models.Container, error) {
 	var container models.Container
 
-	database, err := sql.Open(cs.Env.DatabaseAdapter, cs.Env.DatabaseName)
-	if err != nil {
-		return nil, err
-	}
-	defer database.Close()
-
 	stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s` WHERE id = ?", models.ContainerTable)
-	res := database.QueryRow(stmt, id)
-
-	if err != nil {
-		return nil, err
-	}
+	res := cs.db.QueryRow(stmt, id)
 
 	res.Scan(&container.ID, &container.Title)
 
@@ -60,14 +49,9 @@ func (cs *ContainerService) FindOne(id int) (*models.Container, error) {
 }
 
 func (cs *ContainerService) Create(title string) error {
-	database, err := sql.Open(cs.Env.DatabaseAdapter, cs.Env.DatabaseName)
-	if err != nil {
-		return err
-	}
-	defer database.Close()
-
 	stmt := fmt.Sprintf("INSERT INTO `%s` (id, title) VALUES (NULL, ?)", models.ContainerTable)
-	res, err := database.Prepare(stmt)
+
+	res, err := cs.db.Prepare(stmt)
 
 	if err != nil {
 		return err
@@ -82,16 +66,8 @@ func (cs *ContainerService) Create(title string) error {
 }
 
 func (cs *ContainerService) Delete(id int) error {
-	database, err := sql.Open(cs.Env.DatabaseAdapter, cs.Env.DatabaseName)
-
-	if err != nil {
-		return err
-	}
-
-	defer database.Close()
-
 	stmt := fmt.Sprintf("DELETE FROM `%s` WHERE id = ?", models.ContainerTable)
-	res, err := database.Prepare(stmt)
+	res, err := cs.db.Prepare(stmt)
 
 	if err != nil {
 		return err

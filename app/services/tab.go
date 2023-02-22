@@ -11,27 +11,20 @@ import (
 )
 
 type TabService struct {
+	db  *sql.DB
 	Env *bootstrap.Env
 }
 
-func NewTabService(env *bootstrap.Env) TabService {
-	return TabService{Env: env}
+func NewTabService(db *sql.DB, env *bootstrap.Env) TabService {
+	return TabService{db: db, Env: env}
 }
 
 func (ts *TabService) FindAll(containerID int) ([]*models.Tab, error) {
 	var tabs []*models.Tab
 
-	database, err := sql.Open(ts.Env.DatabaseAdapter, ts.Env.DatabaseName)
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer database.Close()
-
 	stmt := fmt.Sprintf("SELECT `id`, `title`, `slug`, `container_id` FROM `%s` WHERE `container_id` = ?", models.TabTable)
 
-	rows, err := database.Query(stmt, containerID)
+	rows, err := ts.db.Query(stmt, containerID)
 
 	if err != nil {
 		return nil, err
@@ -46,42 +39,24 @@ func (ts *TabService) FindAll(containerID int) ([]*models.Tab, error) {
 	return tabs, nil
 }
 
-func (t *TabService) FindOne(tabID int) (*models.Tab, error) {
+func (ts *TabService) FindOne(tabID int) (*models.Tab, error) {
 	var tab models.Tab
-
-	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer database.Close()
 
 	stmt := fmt.Sprintf("SELECT `id`, `title`, `container_id` FROM `%s` WHERE `id` = ?", models.TabTable)
 
-	res := database.QueryRow(stmt, tabID)
-
-	if err != nil {
-		return nil, err
-	}
+	res := ts.db.QueryRow(stmt, tabID)
 
 	res.Scan(&tab.ID, &tab.Title, &tab.ContainerID)
 
 	return &tab, nil
 }
 
-func (t *TabService) Create(title string, containerID int) error {
-	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
-
-	if err != nil {
-		return err
-	}
-
-	defer database.Close()
+func (ts *TabService) Create(title string, containerID int) error {
 
 	stmt := fmt.Sprintf("INSERT INTO `%s` (id, title, slug, container_id) VALUES (NULL, ?, ?, ?)", models.TabTable)
 
-	res, err := database.Prepare(stmt)
+	res, err := ts.db.Prepare(stmt)
+
 	if err != nil {
 		return err
 	}
@@ -97,20 +72,13 @@ func (t *TabService) Create(title string, containerID int) error {
 	return nil
 }
 
-func (t *TabService) Update(tab *models.Tab) error {
-	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
-
-	if err != nil {
-		return err
-	}
-
-	defer database.Close()
+func (ts *TabService) Update(tab *models.Tab) error {
 
 	slug := generateSlug(tab.Title)
 
 	stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ?, `slug` = ? WHERE `id` = ?", models.TabTable)
 
-	res, err := database.Prepare(stmt)
+	res, err := ts.db.Prepare(stmt)
 
 	if err != nil {
 		return err
@@ -125,17 +93,11 @@ func (t *TabService) Update(tab *models.Tab) error {
 	return nil
 }
 
-func (t *TabService) Delete(id int) error {
-	database, err := sql.Open(t.Env.DatabaseAdapter, t.Env.DatabaseName)
-
-	if err != nil {
-		return err
-	}
-	defer database.Close()
+func (ts *TabService) Delete(id int) error {
 	// Delete all notes related this tab
 	stmt := fmt.Sprintf("DELETE FROM `%s` WHERE `tab_id` = ?", models.NoteTable)
 
-	res, err := database.Prepare(stmt)
+	res, err := ts.db.Prepare(stmt)
 	if err != nil {
 		return err
 	}
@@ -147,7 +109,7 @@ func (t *TabService) Delete(id int) error {
 	}
 	// Delete tab
 	stmt = fmt.Sprintf("DELETE FROM `%s` WHERE `id` = ?", models.TabTable)
-	res, err = database.Prepare(stmt)
+	res, err = ts.db.Prepare(stmt)
 	if err != nil {
 		return err
 	}
