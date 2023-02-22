@@ -3,7 +3,7 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="containerModalLabel">new container</h5>
+	        <h5 class="modal-title" id="containerModalLabel">New Container</h5>
 	        <button type="button" id="container-btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
@@ -12,7 +12,7 @@
 
 	        <form>
 	          <div class="mb-3">
-	            <label for="titleContainerModalField" class="col-form-label">title:</label>
+	            <label for="titleContainerModalField" class="col-form-label">Title</label>
 	            <input type="text" class="form-control" id="titleContainerModalField" v-model="title">
 	          </div>
 	        </form>
@@ -23,7 +23,7 @@
 	                class="btn btn-primary" 
 	                @click="creatingContainer">
 
-	                <i class="bi bi-check2"></i>&nbsp;save
+	                <i class="bi bi-check2"></i>&nbsp;Save
 	        </button>
 	      </div>
 	    </div>
@@ -49,9 +49,6 @@
 		},
 		methods: {
 			creatingContainer() {
-
-				// alert('Demo');
-
 				const titleField = (this.title).replace(/\s/g, '');
 
 				if(titleField == null || titleField == "") {
@@ -60,18 +57,19 @@
 				}
 
 				this.$store.dispatch("createContainer", { title: this.title })
-				.then(() => {
-					this.title = '';
-					flashSuccess("Success Created!", this);
-					this.$store.dispatch('loadContainers');
-				})
-				.then(() => {
-					document.querySelector('#container-btn-close').click()
-				})
-				.catch((err) => {
-					console.log(err);
-					return false;
-				})
+					.then(() => {
+						this.title = '';
+						flashSuccess("Success Created!", this);
+						this.$store.dispatch('loadContainers');
+					})
+					.then(() => {
+						// localStorage.removeItem('tab');
+						document.querySelector('#container-btn-close').click();
+					})
+					.catch((err) => {
+						console.log(err);
+						return false;
+					})
 
 				return;
 

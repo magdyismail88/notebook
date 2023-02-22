@@ -1,14 +1,9 @@
 <template>
   <div id="app">
-
     <Header />
-
     <ContainerForm />
-
     <ContainerChangeForm />
-
     <ContainerEditForm />
-
     <div class="row" style="margin-top: 100px !important;">
       <div class="col-2 app-tabs">
         <Tabs />
@@ -17,11 +12,8 @@
         <router-view />
       </div>
     </div>
-
-
   </div>
 </template>
-
 <script>
 // import VueFroala from 'vue-froala-wysiwyg';
 import Header from "./components/partials/Header";
@@ -55,6 +47,12 @@ export default {
       vm.$store.dispatch('loadTabs');
     }, 1000)
     document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        const currentTab = JSON.parse(localStorage.getItem('tab')) || null;
+        if(currentTab) {
+          vm.$router.push('/tab/' + currentTab.id)
+        }
+      }, 1000)
         // setTimeout(function() {
         //   vm.$router.push(vm.currentPath)
         //   // const containerID = JSON.parse(vm.currentContainer).id

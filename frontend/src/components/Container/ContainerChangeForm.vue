@@ -4,7 +4,7 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" :id="modalLabelUniqueID">change container</h5>
+	        <h5 class="modal-title" :id="modalLabelUniqueID">Change Container</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
@@ -50,6 +50,8 @@
 				this.$store.dispatch("changeContainer", this.container_id)
 				.then(() => {
 					
+					localStorage.removeItem('tab')
+
 					if(this.$route.path != '/') {
 						this.$router.push('/');
 					}

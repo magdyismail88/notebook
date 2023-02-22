@@ -4,16 +4,14 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="containerEditModalLabel">edit container</h5>
+	        <h5 class="modal-title" id="containerEditModalLabel">Edit Container</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-
 				<Flash :status=status :isError=isError :msg=msg />
-
 	        <form>
 	          <div class="mb-3">
-	            <label for="titleContainerEditModalField" class="col-form-label">title:</label>
+	            <label for="titleContainerEditModalField" class="col-form-label">Title</label>
 	            <input type="text" class="form-control" id="titleContainerEditModalField" 
 	            	v-model="selectedContainer" @focus="getTheLast">
 	          </div>
@@ -24,7 +22,7 @@
 	        <button type="button" 
 	                class="btn btn-primary"
 	                @click="updatingContainer" id="btnContainerSave">
-	                <i class="bi bi-check2"></i>&nbsp;save
+	                <i class="bi bi-check2"></i>&nbsp;Save
 	        </button>
 	      </div>
 	    </div>
@@ -54,13 +52,9 @@
 		},
 		methods: {
 			updatingContainer() {
-
-				// alert('Demo');
-
-				let titleContainerField = document.getElementById('titleContainerEditModalField');
-
-				let titleField = (titleContainerEditModalField.value).replace(/\s/g, '');
-
+				const titleContainerField = document.getElementById('titleContainerEditModalField');
+				const titleField = (titleContainerEditModalField.value).replace(/\s/g, '');
+				
 				if(titleField == null || titleField == "") {
 					flashError("Fill the title field", this);
 					return false;

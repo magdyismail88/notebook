@@ -76,6 +76,7 @@
         if(check) {
           this.$store.dispatch('deleteContainer')
           .then(() => {
+            localStorage.removeItem('tab')
             this.$store.dispatch('loadContainers');
             this.$store.dispatch('setDefaultContainer')
             this.$store.dispatch('changeContainer', 0);
