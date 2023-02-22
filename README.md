@@ -45,9 +45,9 @@ localhost:8888
 
 ![Screenshot](https://github.com/magdyismail88/notebook/blob/master/assets/screenshot-01?raw=true")
 
-![Screenshot](https://raw.githubusercontent.com/magdyismail88/notebook/master/assets/screenshot-02.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/master/assets/screenshot-02?raw=true")
 
-![Screenshot](https://raw.githubusercontent.com/magdyismail88/notebook/master/assets/screenshot-03.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/master/assets/screenshot-03?raw=true")
 
 
 ### Application Structure
