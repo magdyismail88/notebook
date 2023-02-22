@@ -72,4 +72,8 @@ export default {
   .app-tabs {
     min-height: 1000px;
   }
+
+  body {
+    background-color: #ecf0f1;
+  }
 </style>

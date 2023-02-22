@@ -12,28 +12,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <span>Container</span>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-
-<!--           <router-link class="nav-link active" artia-current="page" >
-            Home
-          </router-link> -->
-
-          <a href="#"
-           class="nav-link text-success"
-           data-bs-toggle="modal"
-           data-bs-target="#tabModal"
-           data-bs-whatever="@getbootstrap"><i class="bi bi-plus-circle-dotted"></i>&nbsp;add tab
-          </a>
-
-
-        </li>
-
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <li class="nav-item">
           <span class="nav-link">
-            {{ selectedContainer }}
+            <i class="bi bi-chevron-bar-right"></i> {{ selectedContainer }}
             <a  href="#" 
                 class="text-white"
                 data-bs-toggle="modal"

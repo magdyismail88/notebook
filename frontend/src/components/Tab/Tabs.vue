@@ -1,21 +1,30 @@
 <template>
 	<div class="tabs">
+		<a href="#"
+		   style="margin-left: 5px;"
+           class="nav-link"
+           data-bs-toggle="modal"
+           data-bs-target="#tabModal"
+           data-bs-whatever="@getbootstrap">
+		   <i class="bi bi-plus-square-dotted"></i>&nbsp;Add Tab
+        </a>
+		<hr class="border border-primary border-1 opacity-75">
 
-		<nav class="nav flex-colum">
+		
 
+		<ul class="list-group">
 	      	<router-link 
 	      		v-for="tab in getTabs"
 	            class="nav-link"
 	            :to="{name: 'Tab', params: {id: tab.id} }"
 	            v-bind:key="tab.id">
-	            <h5>{{ tab.title }}&nbsp;
-	            <a href="#" @click="removeTab(tab.id)"><span>&times;</span></a></h5>
+	            <li class="list-group-item" style="width: 100%;">
+					<p style="padding: 5px;  margin: 0;">{{ tab.title }}&nbsp; </p>
+				</li>
+	            
 	      	</router-link>
-
-	    </nav>
-
+	    </ul>
 	    <TabForm />
-		
 	</div>
 </template>
 
@@ -35,16 +44,11 @@
 		},
 		methods: {
 			removeTab(tab_id) {
-				// event.preventDefault();
-
-				let check = confirm("Are you sure?");
-
+				const check = confirm("Are you sure?");
 				if(check === false) {
 					return false;
 				}
-
 				this.$store.dispatch('removeTab', tab_id)
-				// .then(() => this.$route.push('/'))
 				.then(() => {
 					this.$store.dispatch('loadTabs');
 					this.$router.push('/');

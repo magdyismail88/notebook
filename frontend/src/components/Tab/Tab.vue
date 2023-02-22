@@ -1,47 +1,35 @@
 <template>
 	<div id="tab">
-
 		<div>
-
 			<table class="table">
 				<tr>
 					<td>
 						<span class="h2">{{ currentTab.title }}</span>
-
+						
+						<a href="#" class="btn text-danger" @click="removeTab(currentTab.id)"><span><i class="bi bi-trash"></i> Remove</span></a>
 						<a  href="#"
 							data-bs-toggle="modal"
 							:data-bs-target="tabEditUniqueID"
 							data-bs-whatever="@getbootstrap">
-							&nbsp;&nbsp;<i class="bi bi-pencil-square"></i>
+							&nbsp;&nbsp;<i class="bi bi-pencil-square"> Edit</i>
 						</a>
 					</td>
 					<td>
-						
 						<router-link to="/note/new">
-							<i class="bi bi-plus-square-dotted"></i> add note
+							<i class="bi bi-plus-square-dotted"></i> Add Note
 						</router-link>
-
 					</td>
 				</tr>
 			</table>
-
 			<hr>
-
 			<TabEditForm :t=currentTab />
-
 		</div>
-
 		<div class="row p-2">
 			<Note v-for="note in notes" v-bind:key="note.id" :note=note />
 		</div>
-
-		
-
 	</div>
 </template>
-
 <script>
-
 // this.$route.params.id
 	import { mapGetters } from 'vuex';
 	import Note from "../Note/Note";
@@ -55,7 +43,6 @@
 			}
 		},
 		created() {
-
 			this.getCurrentTab();
 			this.$store.dispatch('loadNotes', this.$route.params.id);
 		},
@@ -77,6 +64,17 @@
 				this.$store.dispatch('loadCurrentTab', this.$route.params.id)
 				.then(() => {
 					this.currentTab = this.$store.getters.getCurrentTab
+				})
+			},
+			removeTab(tab_id) {
+				const check = confirm("Are you sure?");
+				if(check === false) {
+					return false;
+				}
+				this.$store.dispatch('removeTab', tab_id)
+				.then(() => {
+					this.$store.dispatch('loadTabs');
+					this.$router.push('/');
 				})
 			}
 		},
