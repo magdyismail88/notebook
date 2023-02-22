@@ -4,13 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/magdyismail88/notebook/bootstrap"
 	_ "github.com/mattn/go-sqlite3"
 )
 
-type Container struct {
-	Env *bootstrap.Env
-}
+type Container struct{}
 
 func (c *Container) Up() error {
 	database, err := sql.Open(DatabaseAdapter, DatabasePath)

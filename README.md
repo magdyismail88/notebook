@@ -72,6 +72,7 @@ localhost:8888
 ├── bin
 ├── bootstrap
 │   ├── app.go
+│   ├── database.go
 │   └── env.go
 ├── cmd
 │   └── install.go
