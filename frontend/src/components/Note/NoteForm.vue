@@ -8,7 +8,7 @@
 
 			<div class="card-header">
 				<div class="modal-header">
-			        <h5 class="modal-title" id="ddd">New Note</h5>
+			        <!-- <h5 class="modal-title" id="ddd">New Note</h5> -->
 			        <button type="button"
 						class="btn-close" 
 						aria-label="Close"
@@ -73,6 +73,7 @@
 			            console.log('initialized')
 			          }
 			        },
+					height: '340px',
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',

@@ -12,16 +12,16 @@
 
 	        <form>
 	          <div class="mb-3">
-	            <label :for="titleUniqueID" class="col-form-label">title: </label>
+	            <label :for="titleUniqueID" class="col-form-label">Title</label>
 	            <input type="text" class="form-control" :id="titleUniqueID" 
-	            v-model="t.title">
+	            v-model="title">
 	          </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i></button>
+	        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i></button> -->
 	        <button type="button" class="btn btn-primary" @click="updatingTab">
-	        	<i class="bi bi-check2"></i>&nbsp;save
+	        	<i class="bi bi-check2"></i>&nbsp;Save
 	        </button>
 	      </div>
 	    </div>
@@ -37,15 +37,16 @@
 		name: 'TabEditForm',
 		props: ['t'],
 		mounted() {
-			// setTimeout(() => {
-			// 	this.title = this.t.title
-			// }, 3000)
+			setTimeout(() => {
+				this.title = this.t.title
+			}, 3000)
 		},
 		data() {
 			return {
 				msg: '',
 				status: false,
-				isError: false
+				isError: false,
+				title: ''
 			}
 		},
 		components: {
@@ -54,12 +55,14 @@
 		methods: {
 			updatingTab() {
 
-				const titleField = (this.t.title).replace(/\s/g, '');
+				const titleField = (this.title).replace(/\s/g, '');
 
 				if(titleField == "" || titleField == null) {
 					flashError("Fill the title field", this);
 					return false;
 				}
+
+				this.t.title = this.title;
 
 				this.$store.dispatch('updateTab', this.t)
 					.then(() => {

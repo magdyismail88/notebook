@@ -5,10 +5,9 @@
 		<Flash :status=status :isError=isError :msg=msg />
 		
 		<div class="card shadow-sm">
-
 			<div class="card-header">
 				<div class="modal-header">
-			        <h5 class="modal-title">edit note</h5>
+			        <!-- <h5 class="modal-title"></h5> -->
 			        <button type="button" 
 			        		class="btn-close" 
 			        		aria-label="Close" 
@@ -78,6 +77,7 @@
 			            console.log('initialized')
 			          }
 			        },
+					height: '340px',
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',

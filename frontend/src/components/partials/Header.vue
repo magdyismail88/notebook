@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #34495e;" data-bs-theme="dark">
   <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm"> -->
   <div class="container-fluid">
-    <router-link class="navbar-brand" to="/">
+    <router-link class="navbar-brand text-white" to="/">
       <i class="h3 bi bi-journals"></i>&nbsp;
       <!-- <strong>Notebook</strong> -->
     </router-link>
@@ -12,10 +12,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <span>Container</span>
+      <span class="text-white">Container</span>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <span class="nav-link">
+          <span class="nav-link text-white">
             <i class="bi bi-chevron-bar-right"></i> {{ selectedContainer }}
             <a  href="#" 
                 class="text-white"
@@ -29,38 +29,38 @@
           </span> 
         </li>
 
-        &nbsp;&nbsp;
+      </ul>
 
-        <li class="nav-item">
+      <span class="navbar-text">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
           <a href="#"
-           class="nav-link text-primary"
+           class="nav-link text-white"
            data-bs-toggle="modal"
            data-bs-target="#containerChangeModal"
            data-bs-whatever="@getbootstrap">
-           <i class="bi bi-caret-down"></i>&nbsp;change
+           <i class="bi bi-caret-down"></i>&nbsp;Change
           </a>
         </li>
-
 
         <li class="nav-item">
           <a href="#"
-           class="nav-link text-success"
+           class="nav-link text-white"
            data-bs-toggle="modal"
            data-bs-target="#containerModal"
            data-bs-whatever="@getbootstrap">
-           <i class="bi bi-plus-circle-dotted"></i>&nbsp;add
+           <i class="bi bi-plus-square-dotted"></i>&nbsp;Add
           </a>
         </li>
-
 
         <li class="nav-item">
           <a href="#" class="nav-link text-danger" @click="deleteCurrentContainer">
-            <i class="bi bi-x-circle"></i>&nbsp;delete
+            <i class="bi bi-trash"></i>&nbsp;Remove
           </a>
         </li>
+        </ul>
+      </span>
 
-
-      </ul>
     </div>
   </div>
 </nav>

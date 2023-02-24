@@ -5,10 +5,15 @@
 				{{ note.title | short }} <a href="#" @click="removeNote" class="ml-auto float-right">&times;</a>
 			</div>
 			<!-- <div class="card-body">{{ note.content | short }}</div> -->
-			<div class="card-body" style="height: 120px;">
-				{{ note.content | bodyShort }}
-			</div>
-			<div class="card-footer">
+			<router-link 
+				:to="{name: 'NoteEditForm', params: {id: note.id} }"
+				class="mt-4">
+				
+				<div class="card-body" style="height: 180px;">
+					{{ note.content | bodyShort }}
+				</div>
+			</router-link>
+			<!-- <div class="card-footer">
 				
 				<router-link 
 					:to="{name: 'NoteEditForm', params: {id: note.id} }"
@@ -16,7 +21,7 @@
 					<i class="bi bi-eye"></i>  <span>Read</span>	
 				</router-link>
 
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
@@ -55,7 +60,7 @@
 		},
 		filters: {
 			short(str) {
-				return str.slice(0, 20) + '...';
+				return str.length > 20 ? str.slice(0, 20) + '...' : str;
 			},
 			bodyShort(str) {
 				return '...'

@@ -73,5 +73,18 @@ export default {
 
   body {
     background-color: #ecf0f1;
+    /* background-color:#7f8c8d; */
+    /* More Black */
+    /* background-color:#2d3436; */
+    /* Black too */
+    /* background-color:#222f3e; */
+    /* No. 2 */
+    /* background-color:#576574; */
+    /* Most Black */
+    /* background-color:#1e272e; */
+
+    
+    
+    
   }
 </style>

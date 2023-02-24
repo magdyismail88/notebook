@@ -4,24 +4,22 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" :id="modalLabelUniqueID">new tab</h5>
+	        <h5 class="modal-title" :id="modalLabelUniqueID">New Tab</h5>
 	        <button type="button" id="tab-btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-
 			<Flash :status=status :isError=isError :msg=msg />
-
 	        <form>
 	          <div class="mb-3">
-	            <label :for="titleUniqueID" class="col-form-label">title: </label>
+	            <label :for="titleUniqueID" class="col-form-label">Title </label>
 	            <input type="text" class="form-control" :id="titleUniqueID" v-model="title">
 	          </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i></button>
+	        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i></button> -->
 	        <button type="button" class="btn btn-primary" @click="newTab">
-	        	<i class="bi bi-check2"></i>&nbsp;save
+	        	<i class="bi bi-check2"></i>&nbsp;Save
 	        </button>
 	      </div>
 	    </div>

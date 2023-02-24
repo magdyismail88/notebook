@@ -1,19 +1,20 @@
 <template>
 	<div class="tabs">
 		<a href="#"
-		   style="margin-left: -14px; width:246px;"
-           class="nav-link border-start-0 btn text-primary border-primary rounded-pill shadow-sm"
+		   style="margin-left: -14px; width:246px; line-height: 33px; height: 45px; background-color: #34495e;"
+           class="nav-link border-start-0 btn text-white border-white rounded-pill"
            data-bs-toggle="modal"
            data-bs-target="#tabModal"
            data-bs-whatever="@getbootstrap">
 		   <i class="bi bi-plus-square-dotted"></i>&nbsp;Add Tab
         </a>
-		<hr class="border border-primary border-1 opacity-75">
+		<hr class="border border-primary border-1 opacity-75" 
+			style="width: 230px; margin-top: 50px;">
 
 		<ul class="list-group">
 	      	<router-link 
 	      		v-for="tab in getTabs"
-				style="margin-left: -14px"
+				style="margin-left: -14px;"
 	            class="nav-link border-start-0 rounded"
 	            :to="{name: 'Tab', params: {id: tab.id} }"
 	            v-bind:key="tab.id">
