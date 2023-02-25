@@ -17,7 +17,7 @@ func (t *Tab) Up() error {
 		return err
 	}
 
-	stmt := fmt.Sprintf("CREATE TABLE IF NOT EXISTS `tabs` (`id` INTEGER NOT NULL UNIQUE, `title` TEXT NOT NULL, `parent`  INTEGER, `slug`  TEXT NOT NULL, `container_id` INTEGER, PRIMARY KEY(`id` AUTOINCREMENT), FOREIGN KEY(`parent`) REFERENCES `tabs`(`id`))")
+	stmt := fmt.Sprintf("CREATE TABLE IF NOT EXISTS `tabs` (`id` CHAR NOT NULL UNIQUE PRIMARY KEY, `title` TEXT NOT NULL, `container_id` CHAR)")
 
 	_, err = database.Exec(stmt)
 

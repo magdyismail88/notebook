@@ -22,8 +22,8 @@ const getters = {
 const actions = {
 	loadTabs: ({commit}) => {
 		return new Promise((resolve, reject) => {
-			let container = JSON.parse(localStorage.getItem("container"));
-			axios.get(`http://localhost:8888/api/tabs/${container.id}`)
+			const container = JSON.parse(localStorage.getItem("container"));
+			axios.get('http://localhost:8888/api/tabs/' + container.id + '/tabs')
 			.then((res) => {
 				commit('SET_TABS', res.data);
 				resolve(res);
@@ -35,58 +35,23 @@ const actions = {
 	},
 	createTab: ({commit}, data) => {
 		return new Promise((resolve, reject) => {
-
-			let container = JSON.parse(localStorage.getItem("container"));
-
-			axios.post("http://localhost:8888/api/tabs", {
-				// headers: {
-				// 	'content-type': 'application/x-www-form-urlencoded',
-				// 	// 'content-type': 'application/json',
-				// },
+			const container = JSON.parse(localStorage.getItem("container"));
+			axios.post('http://localhost:8888/api/tabs', {
 				title: data.title,
-				container_id: container.id
+				containerId: container.id
 			})
-			.then((res) => {
-				resolve(res);
-			})
-			.catch((err) => {
-				reject(err);
-			})
-		});
-	},
-	removeTab: ({commit}, tab_id) => {
-		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/tabs/${tab_id}/delete`)
-			.then((res) => {
-				resolve(res);
-			})
-			.catch((err) => {
-				console.log(err);
-				reject(err);
-			})
-		})
-	},
-	updateTab: ({commit}, data) => {
-		return new Promise((resolve, reject) => {
-			axios.post(`http://localhost:8888/api/tabs/${data.id}/update`, {
-				id: data.id,
-				title: data.title
-			})
-			.then((res) => {
-				resolve(res);
-			})
-			.catch((err) => {
-				console.log(err);
-				reject(err);
-			});
-		});
-	},
-	loadCurrentTab: ({commit}, tab_id) => {
-		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/tabs/${tab_id}/tab`)
 				.then((res) => {
-					commit('SET_CURRENT_TAB', res.data);
-					localStorage.setItem('tab', JSON.stringify(res.data))
+					resolve(res);
+				})
+				.catch((err) => {
+					reject(err);
+				})
+		});
+	},
+	removeTab: ({commit}, tabId) => {
+		return new Promise((resolve, reject) => {
+			axios.delete('http://localhost:8888/api/tabs/' + tabId)
+				.then((res) => {
 					resolve(res);
 				})
 				.catch((err) => {
@@ -94,9 +59,38 @@ const actions = {
 					reject(err);
 				})
 		})
+	},
+	updateTab: ({commit}, tab) => {
+		return new Promise((resolve, reject) => {
+			axios.put('http://localhost:8888/api/tabs/' + tab.id, {
+				id: tab.id,
+				title: tab.title
+			})
+				.then((res) => {
+					resolve(res);
+				})
+				.catch((err) => {
+					console.log(err);
+					reject(err);
+				});
+		});
+	},
+	loadCurrentTab: ({commit}, tabId) => {
+		return new Promise((resolve, reject) => {
+			axios.get('http://localhost:8888/api/tabs/' + tabId)
+					.then((res) => {
+						commit('SET_CURRENT_TAB', res.data);
+						console.log('TAB', res.data);
+						localStorage.setItem('tab', JSON.stringify(res.data))
+						resolve(res);
+					})
+					.catch((err) => {
+						console.log(err);
+						reject(err);
+					})
+		})
 	}
 };
-
 
 export default {
 	state,

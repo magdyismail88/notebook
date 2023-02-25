@@ -4,18 +4,15 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/magdyismail88/notebook/app/models"
 	"github.com/magdyismail88/notebook/app/services"
-	"github.com/magdyismail88/notebook/bootstrap"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 type TabController struct {
 	TabService services.TabService
-	Env        *bootstrap.Env
 }
 
 type tabForm struct {
@@ -26,8 +23,8 @@ func (tc *TabController) FindAll(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusOK)
 
 	vars := mux.Vars(r)
-	containerID, _ := strconv.ParseInt(vars["container_id"], 10, 64)
-	tabs, err := tc.TabService.FindAll(int(containerID))
+
+	tabs, err := tc.TabService.FindAll(vars["containerId"])
 
 	if err != nil {
 		panic(err)
@@ -37,12 +34,13 @@ func (tc *TabController) FindAll(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// Find tab and fetch all notes into this tab
 func (tc *TabController) FindOne(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusOK)
 	// Get tab id
 	vars := mux.Vars(r)
-	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
-	tab, err := tc.TabService.FindOne(int(tabID))
+
+	tab, err := tc.TabService.FindOne(vars["id"])
 
 	if err != nil {
 		panic(err)
@@ -71,8 +69,8 @@ func (tc *TabController) Update(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusNoContent)
 	// tab_id
 	vars := mux.Vars(r)
-	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
-	tab, err := tc.TabService.FindOne(int(tabID))
+
+	tab, err := tc.TabService.FindOne(vars["id"])
 
 	if err != nil {
 		panic(err)
@@ -95,14 +93,15 @@ func (tc *TabController) Destroy(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusNoContent)
 
 	vars := mux.Vars(r)
-	tabID, _ := strconv.ParseInt(vars["tab_id"], 10, 64)
-	_, err := tc.TabService.FindOne(int(tabID))
+	id := vars["id"]
+
+	_, err := tc.TabService.FindOne(id)
 
 	if err != nil {
 		panic(err)
 	}
 
-	err = tc.TabService.Delete(int(tabID))
+	err = tc.TabService.Delete(id)
 
 	if err != nil {
 		panic(err)

@@ -6,18 +6,24 @@
 					<td>
 						<span class="h2">{{ currentTab.title }}</span>
 						
-						<a href="#" class="btn text-danger" @click="removeTab(currentTab.id)"><span><i class="bi bi-trash"></i> Remove</span></a>
 						<a  href="#"
 							data-bs-toggle="modal"
 							:data-bs-target="tabEditUniqueID"
 							data-bs-whatever="@getbootstrap">
 							&nbsp;&nbsp;<i class="bi bi-pencil-square"> Edit</i>
 						</a>
+
+						<a href="#" 
+							class="btn text-danger" 
+							@click="removeTab(currentTab.id)">
+							<span><i class="bi bi-trash"></i> Remove</span>
+						</a>
+
 					</td>
 					<td>
 						<router-link to="/note/new" 
-							style="width: 100px; background-color: #34495e; margin-right: -40px;"
-							class="btn text-white border-white rounded-pill">
+							style="width: 140px; margin-right: -40px;"
+							class="btn btn-primary bg-primary">
 							<i class="bi bi-plus-square-dotted"></i> Add Note
 						</router-link>
 					</td>
@@ -68,16 +74,16 @@
 					this.currentTab = this.$store.getters.getCurrentTab
 				})
 			},
-			removeTab(tab_id) {
+			removeTab(tabId) {
 				const check = confirm("Are you sure?");
 				if(check === false) {
 					return false;
 				}
-				this.$store.dispatch('removeTab', tab_id)
-				.then(() => {
-					this.$store.dispatch('loadTabs');
-					this.$router.push('/');
-				})
+				this.$store.dispatch('removeTab', tabId)
+					.then(() => {
+						this.$store.dispatch('loadTabs');
+						this.$router.push('/');
+					})
 			}
 		},
 		components: {
@@ -86,8 +92,7 @@
 			TabEditForm
 		},
 		watch: {
-			"$route": ["getNotesForCurrentTab", "getCurrentTab"],
-			// "$route": 
+			"$route": ["getNotesForCurrentTab", "getCurrentTab"]
 		}
 	};
 </script>

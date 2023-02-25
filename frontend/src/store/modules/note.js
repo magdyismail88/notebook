@@ -6,7 +6,7 @@ const state = {
 };
 
 const mutations = {
-	"SET_NOTES" (state, notes) {
+	'SET_NOTES' (state, notes) {
 		state.notes = notes;
 	},
 	'SET_NOTE' (state, note) {
@@ -20,78 +20,74 @@ const getters = {
 };
 
 const actions = {
-	loadNotes: ({commit}, tab_id) => {
+	loadNotes: ({commit}, tabId) => {
 		return new Promise((resolve, reject) => {
-			axios.get('http://localhost:8888/api/notes/' + tab_id)
-			.then((res) => {
-				commit('SET_NOTES', res.data);
-				resolve(res);
-			})
-			.catch((err) => {
-				console.log(err);
-				reject(err);
-			})
+			axios.get('http://localhost:8888/api/notes/' + tabId + '/notes')
+				.then((res) => {
+					commit('SET_NOTES', res.data);
+					resolve(res);
+				})
+				.catch((err) => {
+					console.log(err);
+					reject(err);
+				})
 		});
 	},
-	loadNote: ({commit}, note_id) => {
+	loadNote: ({commit}, noteId) => {
 		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/notes/${note_id}/show`)
-			.then((res) => {
-				commit('SET_NOTE', res.data);
-				resolve(res);
-			})
-			.catch((err) => {
-				console.log(err);
-				reject(err);
-			})
+			axios.get('http://localhost:8888/api/notes/' + noteId)
+				.then((res) => {
+					commit('SET_NOTE', res.data);
+					resolve(res);
+				})
+				.catch((err) => {
+					console.log(err);
+					reject(err);
+				})
 		})
 	},
 	createNote: ({commit, state, getters}, data) => {
 		return new Promise((resolve, reject) => {
 			axios.post('http://localhost:8888/api/notes', {
-				// data: qs.stringify(data)
 				title: data.title,
 				content: data.content,
-				tab_id: getters.getCurrentTab.id,
-				is_textual: data.is_textual
+				tabId: getters.getCurrentTab.id
 			})
-			.then((res) => {
-				resolve(res);
-			})
-			.catch((err) => {
-				reject(err);
-			});
-		});
-	},
-	destroyNote: ({commit}, note_id) => {
-
-		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/notes/${note_id}/delete`)
-			.then((res) => {
-				resolve(res);
-			})
-			.catch((err) => {
-				console.log(err);
-				reject(err);
-			});
+				.then((res) => {
+					resolve(res);
+				})
+				.catch((err) => {
+					reject(err);
+				});
 		});
 	},
 	updateNote: ({commit}, data) => {
 		return new Promise((resolve, reject) => {
-			axios.post(`http://localhost:8888/api/notes/${data.id}/update`, {
+			axios.put('http://localhost:8888/api/notes/' + data.id, {
 				title: data.title,
 				content: data.content,
 				id: data.id,
-				tab_id: data.tab_id,
-				is_textual: data.is_textual
+				tabId: data.tabId
 			})
-			.then((res) => {
-				resolve(res);
-			})
-			.catch((err) => {
-				reject(err);
-			})
+				.then((res) => {
+					resolve(res);
+				})
+				.catch((err) => {
+					reject(err);
+				})
 		})
+	},
+	destroyNote: ({commit}, noteId) => {
+		return new Promise((resolve, reject) => {
+			axios.delete('http://localhost:8888/api/notes/' + noteId)
+				.then((res) => {
+					resolve(res);
+				})
+				.catch((err) => {
+					console.log(err);
+					reject(err);
+				});
+		});
 	}
 
 };

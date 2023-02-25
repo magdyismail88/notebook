@@ -5,17 +5,15 @@ import (
 	"fmt"
 
 	"github.com/magdyismail88/notebook/app/models"
-	"github.com/magdyismail88/notebook/bootstrap"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 type ContainerService struct {
-	db  *sql.DB
-	Env *bootstrap.Env
+	db *sql.DB
 }
 
-func NewContainerService(db *sql.DB, env *bootstrap.Env) ContainerService {
-	return ContainerService{db: db, Env: env}
+func NewContainerService(db *sql.DB) ContainerService {
+	return ContainerService{db: db}
 }
 
 func (cs *ContainerService) FindAll() ([]*models.Container, error) {
@@ -37,7 +35,7 @@ func (cs *ContainerService) FindAll() ([]*models.Container, error) {
 	return containers, nil
 }
 
-func (cs *ContainerService) FindOne(id int) (*models.Container, error) {
+func (cs *ContainerService) FindOne(id string) (*models.Container, error) {
 	var container models.Container
 
 	stmt := fmt.Sprintf("SELECT `id`, `title` FROM `%s` WHERE id = ?", models.ContainerTable)
@@ -49,14 +47,16 @@ func (cs *ContainerService) FindOne(id int) (*models.Container, error) {
 }
 
 func (cs *ContainerService) Create(title string) error {
-	stmt := fmt.Sprintf("INSERT INTO `%s` (id, title) VALUES (NULL, ?)", models.ContainerTable)
+	stmt := fmt.Sprintf("INSERT INTO `%s` (id, title) VALUES (?, ?)", models.ContainerTable)
 
 	res, err := cs.db.Prepare(stmt)
 
 	if err != nil {
 		return err
 	}
-	_, err = res.Exec(title)
+
+	id := generateUUIDV4()
+	_, err = res.Exec(id, title)
 
 	if err != nil {
 		return err
@@ -65,7 +65,25 @@ func (cs *ContainerService) Create(title string) error {
 	return nil
 }
 
-func (cs *ContainerService) Delete(id int) error {
+func (cs *ContainerService) Update(container *models.Container) error {
+	stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ?  WHERE `id` = ?", models.ContainerTable)
+
+	res, err := cs.db.Prepare(stmt)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = res.Exec(container.Title, container.ID)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (cs *ContainerService) Delete(id string) error {
 	stmt := fmt.Sprintf("DELETE FROM `%s` WHERE id = ?", models.ContainerTable)
 	res, err := cs.db.Prepare(stmt)
 

@@ -3,26 +3,23 @@ package services
 import (
 	"database/sql"
 	"fmt"
-	"strings"
 
 	"github.com/magdyismail88/notebook/app/models"
-	"github.com/magdyismail88/notebook/bootstrap"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 type TabService struct {
-	db  *sql.DB
-	Env *bootstrap.Env
+	db *sql.DB
 }
 
-func NewTabService(db *sql.DB, env *bootstrap.Env) TabService {
-	return TabService{db: db, Env: env}
+func NewTabService(db *sql.DB) TabService {
+	return TabService{db: db}
 }
 
-func (ts *TabService) FindAll(containerID int) ([]*models.Tab, error) {
+func (ts *TabService) FindAll(containerID string) ([]*models.Tab, error) {
 	var tabs []*models.Tab
 
-	stmt := fmt.Sprintf("SELECT `id`, `title`, `slug`, `container_id` FROM `%s` WHERE `container_id` = ?", models.TabTable)
+	stmt := fmt.Sprintf("SELECT `id`, `title`, `container_id` FROM `%s` WHERE `container_id` = ?", models.TabTable)
 
 	rows, err := ts.db.Query(stmt, containerID)
 
@@ -32,14 +29,14 @@ func (ts *TabService) FindAll(containerID int) ([]*models.Tab, error) {
 
 	for rows.Next() {
 		var tab models.Tab
-		rows.Scan(&tab.ID, &tab.Title, &tab.Slug, &tab.ContainerID)
+		rows.Scan(&tab.ID, &tab.Title, &tab.ContainerID)
 		tabs = append(tabs, &tab)
 	}
 
 	return tabs, nil
 }
 
-func (ts *TabService) FindOne(tabID int) (*models.Tab, error) {
+func (ts *TabService) FindOne(tabID string) (*models.Tab, error) {
 	var tab models.Tab
 
 	stmt := fmt.Sprintf("SELECT `id`, `title`, `container_id` FROM `%s` WHERE `id` = ?", models.TabTable)
@@ -51,9 +48,9 @@ func (ts *TabService) FindOne(tabID int) (*models.Tab, error) {
 	return &tab, nil
 }
 
-func (ts *TabService) Create(title string, containerID int) error {
+func (ts *TabService) Create(title, containerID string) error {
 
-	stmt := fmt.Sprintf("INSERT INTO `%s` (id, title, slug, container_id) VALUES (NULL, ?, ?, ?)", models.TabTable)
+	stmt := fmt.Sprintf("INSERT INTO `%s` (id, title, container_id) VALUES (?, ?, ?)", models.TabTable)
 
 	res, err := ts.db.Prepare(stmt)
 
@@ -61,9 +58,8 @@ func (ts *TabService) Create(title string, containerID int) error {
 		return err
 	}
 
-	slug := generateSlug(title)
-
-	_, err = res.Exec(title, slug, containerID)
+	id := generateUUIDV4()
+	_, err = res.Exec(id, title, containerID)
 
 	if err != nil {
 		return err
@@ -74,9 +70,7 @@ func (ts *TabService) Create(title string, containerID int) error {
 
 func (ts *TabService) Update(tab *models.Tab) error {
 
-	slug := generateSlug(tab.Title)
-
-	stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ?, `slug` = ? WHERE `id` = ?", models.TabTable)
+	stmt := fmt.Sprintf("UPDATE `%s` SET `title` = ? WHERE `id` = ?", models.TabTable)
 
 	res, err := ts.db.Prepare(stmt)
 
@@ -84,7 +78,7 @@ func (ts *TabService) Update(tab *models.Tab) error {
 		return err
 	}
 
-	_, err = res.Exec(tab.Title, slug, tab.ID)
+	_, err = res.Exec(tab.Title, tab.ID)
 
 	if err != nil {
 		return err
@@ -93,7 +87,7 @@ func (ts *TabService) Update(tab *models.Tab) error {
 	return nil
 }
 
-func (ts *TabService) Delete(id int) error {
+func (ts *TabService) Delete(id string) error {
 	// Delete all notes related this tab
 	stmt := fmt.Sprintf("DELETE FROM `%s` WHERE `tab_id` = ?", models.NoteTable)
 
@@ -120,8 +114,4 @@ func (ts *TabService) Delete(id int) error {
 	}
 
 	return nil
-}
-
-func generateSlug(title string) string {
-	return strings.ReplaceAll(strings.ToLower(title), " ", "-")
 }

@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/magdyismail88/notebook/bootstrap"
 )
@@ -9,22 +11,22 @@ func (k *kernel) SetupApiRoutes(r *mux.Router, env *bootstrap.Env) {
 	// r.Headers("X-Requested-With", "XMLHttpRequest")
 	// Container routes
 	r.HandleFunc("/api/containers", k.ContainerCtrl.FindAll).Methods("GET")
-	r.HandleFunc("/api/containers/{container_id}", k.ContainerCtrl.FindOne).Methods("GET")
-	r.HandleFunc("/api/containers/create", k.ContainerCtrl.Create).Methods("POST")
-	// r.HandleFunc("/api/containers/update", containerCtrl.Update).Methods("POST")
-	r.HandleFunc("/api/containers/delete", k.ContainerCtrl.Destroy).Methods("POST")
+	r.HandleFunc("/api/containers/{id}", k.ContainerCtrl.FindOne).Methods(http.MethodGet)
+	r.HandleFunc("/api/containers", k.ContainerCtrl.Create).Methods(http.MethodPost)
+	r.HandleFunc("/api/containers/{id}", k.ContainerCtrl.Update).Methods(http.MethodPut)
+	r.HandleFunc("/api/containers/{id}", k.ContainerCtrl.Destroy).Methods(http.MethodDelete)
 
-	r.HandleFunc("/api/tabs/{container_id}", k.TabCtrl.FindAll).Methods("GET") // Get all tabs
-	r.HandleFunc("/api/tabs/{tab_id}/tab", k.TabCtrl.FindOne).Methods("GET")
-	r.HandleFunc("/api/tabs", k.TabCtrl.Create).Methods("POST") // Create new tab
-	r.HandleFunc("/api/tabs/{tab_id}/delete", k.TabCtrl.Destroy).Methods("GET")
-	r.HandleFunc("/api/tabs/{tab_id}/update", k.TabCtrl.Update).Methods("POST")
+	r.HandleFunc("/api/tabs/{containerId}/tabs", k.TabCtrl.FindAll).Methods(http.MethodGet) // Get all tabs
+	r.HandleFunc("/api/tabs/{id}", k.TabCtrl.FindOne).Methods(http.MethodGet)
+	r.HandleFunc("/api/tabs", k.TabCtrl.Create).Methods(http.MethodPost) // Create new tab
+	r.HandleFunc("/api/tabs/{id}", k.TabCtrl.Update).Methods(http.MethodPut)
+	r.HandleFunc("/api/tabs/{id}", k.TabCtrl.Destroy).Methods(http.MethodDelete)
 
-	r.HandleFunc("/api/notes/{tab_id}", k.NoteCtrl.FindAll).Methods("GET") // Get notes for each tab
-	r.HandleFunc("/api/notes/{note_id}/show", k.NoteCtrl.FindOne).Methods("GET")
-	r.HandleFunc("/api/notes", k.NoteCtrl.Create).Methods("POST") // Create note
-	r.HandleFunc("/api/notes/{note_id}/delete", k.NoteCtrl.Destroy).Methods("GET")
-	r.HandleFunc("/api/notes/{note_id}/update", k.NoteCtrl.Update).Methods("POST")
+	r.HandleFunc("/api/notes/{tabId}/notes", k.NoteCtrl.FindAll).Methods(http.MethodGet) // Get notes for each tab
+	r.HandleFunc("/api/notes/{id}", k.NoteCtrl.FindOne).Methods(http.MethodGet)
+	r.HandleFunc("/api/notes", k.NoteCtrl.Create).Methods(http.MethodPost) // Create note
+	r.HandleFunc("/api/notes/{id}", k.NoteCtrl.Update).Methods(http.MethodPut)
+	r.HandleFunc("/api/notes/{id}", k.NoteCtrl.Destroy).Methods(http.MethodDelete)
 
 	r.HandleFunc("/api/upload", k.UploaderCtrl.Upload)
 	// r.PathPrefix("/tab/[0-9]+").Handler(http.FileServer(http.Dir("./frontend/dist")))

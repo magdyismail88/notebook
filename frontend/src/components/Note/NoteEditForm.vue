@@ -117,27 +117,27 @@
 				}
 
 				this.$store.dispatch('updateNote', this.note)
-				.then(() => {
-					this.$store.dispatch('loadNotes', this.note.tab_id);
-				})
-				.then(() => {
-					flashSuccess("Note Updated", this);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+					.then(() => {
+						this.$store.dispatch('loadNotes', this.note.tabId);
+					})
+					.then(() => {
+						flashSuccess("Note Updated", this);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			},
 			loadingNote() {
 				this.$store.dispatch('loadNote', this.$route.params.id)
-				.then(() => {
-					this.note = this.$store.getters.getNote;
-				})
-				.catch((err) => {
-					console.log(err);
-				})
+					.then(() => {
+						this.note = this.$store.getters.getNote;
+					})
+					.catch((err) => {
+						console.log(err);
+					})
 			},
 			backToParentTab() {
-				this.$router.push(`/tab/${this.note.tab_id}`);
+				this.$router.push(`/tab/${this.note.tabId}`);
 			}
 			
 		},

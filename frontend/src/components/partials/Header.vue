@@ -1,8 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #34495e;" data-bs-theme="dark">
+  <nav id="top-navbar"
+    class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm" 
+    data-bs-theme="dark">
   <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm"> -->
   <div class="container-fluid">
-    <router-link class="navbar-brand text-white" to="/">
+    <router-link class="navbar-brand" to="/">
       <i class="h3 bi bi-journals"></i>&nbsp;
       <!-- <strong>Notebook</strong> -->
     </router-link>
@@ -12,17 +14,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <span class="text-white">Container</span>
+      <span>Container</span>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <span class="nav-link text-white">
+          <span class="nav-link">
             <i class="bi bi-chevron-bar-right"></i> {{ selectedContainer }}
-            <a  href="#" 
-                class="text-white"
+            <a  href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#containerEditModal"
                 data-bs-whatever="@getbootstrap"
-                @click="preparing()"
+                @click="prepareContainerEdit()"
                >
               <i class="bi bi-pencil-square"></i>
             </a>
@@ -35,7 +36,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
           <a href="#"
-           class="nav-link text-white"
+           class="nav-link text-primary"
            data-bs-toggle="modal"
            data-bs-target="#containerChangeModal"
            data-bs-whatever="@getbootstrap">
@@ -45,7 +46,7 @@
 
         <li class="nav-item">
           <a href="#"
-           class="nav-link text-white"
+           class="nav-link text-primary"
            data-bs-toggle="modal"
            data-bs-target="#containerModal"
            data-bs-whatever="@getbootstrap">
@@ -86,9 +87,11 @@
         }
 
       },
-      preparing() {
-        console.log('Prepare for edit container');
+      prepareContainerEdit() {
+        document.querySelector('#titleContainerEditModalField').value = 
+          JSON.parse(localStorage.getItem('container')).title || '';
       }
+
     },
     computed: {
       selectedContainer() {
@@ -97,3 +100,8 @@
     }
   };
 </script>
+<style scoped>
+  #top-navbar {
+    background: linear-gradient(#FFF, #FFF, #e3f2fd)
+  }
+</style>

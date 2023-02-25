@@ -9,8 +9,13 @@
 				:to="{name: 'NoteEditForm', params: {id: note.id} }"
 				class="mt-4">
 				
-				<div class="card-body" style="height: 180px;">
-					{{ note.content | bodyShort }}
+				<div class="card-body" 
+					:style="note.contentText.length > 220 ? 'height: 230px' : 'height:280px'">
+					<!-- {{ note.contentText | get400Chars }} -->
+					<p v-for="elem in note.contentText.slice(0, 220).split('.')">{{ elem }}</p>
+				</div>
+				<div class="card-body" v-if="note.contentText.length > 400">
+					<router-link :to="{name: 'NoteEditForm', params: {id: note.id} }">Read more...</router-link>
 				</div>
 			</router-link>
 			<!-- <div class="card-footer">
@@ -44,7 +49,7 @@
 				}
 
 				this.$store.dispatch('destroyNote', this.note.id)
-				.then((res) => this.$store.dispatch('loadNotes', this.note.tab_id));
+				.then((res) => this.$store.dispatch('loadNotes', this.note.tabId));
 			}
 		},
 		components: {
@@ -62,8 +67,8 @@
 			short(str) {
 				return str.length > 20 ? str.slice(0, 20) + '...' : str;
 			},
-			bodyShort(str) {
-				return '...'
+			get400Chars(str) {
+				return str.slice(0, 400).split()
 			}
 		}
 	};

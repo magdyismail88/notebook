@@ -17,20 +17,27 @@ type kernel struct {
 	UploaderCtrl  *controllers.Uploader
 }
 
+func handleCors(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 func Setup(db *sql.DB, env *bootstrap.Env) *mux.Router {
 	containerCtrl := &controllers.ContainerController{
-		ContainerService: services.NewContainerService(db, env),
-		Env:              env,
+		ContainerService: services.NewContainerService(db),
 	}
 
 	tabCtrl := &controllers.TabController{
-		TabService: services.NewTabService(db, env),
-		Env:        env,
+		TabService: services.NewTabService(db),
 	}
 
 	noteCtrl := &controllers.NoteController{
-		NoteService: services.NewNoteService(db, env),
-		Env:         env,
+		NoteService: services.NewNoteService(db),
 	}
 
 	k := &kernel{
@@ -41,12 +48,12 @@ func Setup(db *sql.DB, env *bootstrap.Env) *mux.Router {
 	}
 
 	r := mux.NewRouter()
-	r.Use(mux.CORSMethodMiddleware(r))
+	r.Use(handleCors)
+	// r.Use(mux.CORSMethodMiddleware(r))
 
 	k.SetupApiRoutes(r, env)
 	k.SetupWebRoutes(r, env)
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./frontend/dist")))
 	return r
-
 }

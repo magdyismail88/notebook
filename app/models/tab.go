@@ -7,8 +7,7 @@ import (
 const TabTable = "tabs"
 
 type Tab struct {
-	ID          int    `json:"id"`
+	ID          string `json:"id"`
 	Title       string `json:"title"`
-	Slug        string `json:"slug"`
-	ContainerID int    `json:"container_id"`
+	ContainerID string `json:"containerId"`
 }

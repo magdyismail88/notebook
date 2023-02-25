@@ -17,7 +17,7 @@ func (c *Container) Up() error {
 		return err
 	}
 
-	stmt := fmt.Sprintf("CREATE TABLE IF NOT EXISTS `containers` (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, title CHAR)")
+	stmt := fmt.Sprintf("CREATE TABLE IF NOT EXISTS `containers` (`id` CHAR NOT NULL PRIMARY KEY UNIQUE, `title` CHAR)")
 
 	_, err = database.Exec(stmt)
 

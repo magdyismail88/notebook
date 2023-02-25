@@ -4,17 +4,14 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/magdyismail88/notebook/app/models"
 	"github.com/magdyismail88/notebook/app/services"
-	"github.com/magdyismail88/notebook/bootstrap"
 )
 
 type ContainerController struct {
 	ContainerService services.ContainerService
-	Env              *bootstrap.Env
 }
 
 type containerForm struct {
@@ -38,8 +35,7 @@ func (cc *ContainerController) FindOne(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusOK)
 
 	vars := mux.Vars(r)
-	containerID, _ := strconv.ParseInt(vars["container_id"], 10, 64)
-	container, err := cc.ContainerService.FindOne(int(containerID))
+	container, err := cc.ContainerService.FindOne(vars["id"])
 
 	if err != nil {
 		panic(err)
@@ -64,18 +60,42 @@ func (cc *ContainerController) Create(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
+func (cc *ContainerController) Update(w http.ResponseWriter, r *http.Request) {
 	writeHeader(w, http.StatusNoContent)
+	// tab_id
+	vars := mux.Vars(r)
+	container, err := cc.ContainerService.FindOne(vars["id"])
 
-	var err error
-	var form containerForm
-	_ = json.NewDecoder(r.Body).Decode(&form)
-	_, err = cc.ContainerService.FindOne(form.ID)
 	if err != nil {
 		panic(err)
 	}
 
-	err = cc.ContainerService.Delete(form.ID)
+	var form containerForm
+	_ = json.NewDecoder(r.Body).Decode(&form)
+
+	container.Title = form.Title
+	err = cc.ContainerService.Update(container)
+
+	if err != nil {
+		panic(err)
+	}
+
+}
+
+func (cc *ContainerController) Destroy(w http.ResponseWriter, r *http.Request) {
+	writeHeader(w, http.StatusNoContent)
+
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	_, err := cc.ContainerService.FindOne(id)
+
+	if err != nil {
+		panic(err)
+	}
+
+	err = cc.ContainerService.Delete(id)
+
 	if err != nil {
 		panic(err)
 	}

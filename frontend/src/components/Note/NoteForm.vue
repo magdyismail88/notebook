@@ -5,7 +5,6 @@
 		<Flash :status=status :isError=isError :msg=msg />
 		
 		<div class="card shadow-sm">
-
 			<div class="card-header">
 				<div class="modal-header">
 			        <!-- <h5 class="modal-title" id="ddd">New Note</h5> -->
@@ -31,18 +30,6 @@
 						</froala>
 					</div>
 
-					<!-- <div class="form-group mt-4">
-						<input
-							class="form-check-input"
-							type="checkbox"
-							:id="isTextualID"
-							v-model="is_textual" />
-
-						 	<label class="form-check-label" :for="isTextualID">
-						    	textual content
-						 	</label>
-					</div> -->
-
 					<div class="form-group mt-4">
 						<button type="button" 
 								class="btn btn-primary" 
@@ -59,7 +46,7 @@
 
 <script>
 	import Flash from '../Flash';
-	import { flashError, flashSuccess, center } from '../../helpers/utils';
+	import { flashError, flashSuccess } from '../../helpers/utils';
 	export default {
 		name: "NoteForm",
 		mounted() {
@@ -87,7 +74,6 @@
         			charCounterCount: false
       			},
       			title: '',
-				is_textual: false,
 				msg: '',
 				status: false,
 				isError: false,
@@ -103,8 +89,6 @@
 				const titleField = (this.title).replace(/\s/g, '');
 				const contentField = (this.content).replace(/\s/g, '');
 
-				// Validation Section
-
 				if(titleField == "" || titleField == null) {
 					flashError("Please fill the title field", this);
 					return false;
@@ -115,41 +99,28 @@
 					return false;
 				}
 
-				// if(this.tabID <= 0) {
-				// 	flashError("Tab id not founded", this);
-				// 	return false;
-				// }
-
-
-				let data = {
+				const data = {
 					title: this.title,
-					content: this.content,
-					is_textual: this.is_textual
+					content: this.content
 				};
 
-
-				// alert(this.is_textual);
-
-				// return false;
-
 				this.$store.dispatch('createNote', data)
-				.then(() => {
-					this.$store.dispatch('loadNotes', this.$store.getters.getCurrentTab.id);
-					this.title = '';
-					this.content = '';
-				})
-				.then(() => {
-					this.$router.push(`/tab/${this.$store.getters.getCurrentTab.id}`);
-					flashSuccess("Note Created", this);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+					.then(() => {
+						this.$store.dispatch('loadNotes', this.$store.getters.getCurrentTab.id);
+						this.title = '';
+						this.content = '';
+					})
+					.then(() => {
+						this.$router.push(`/tab/${this.$store.getters.getCurrentTab.id}`);
+						flashSuccess("Note Created", this);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			},
 			backToParentTab() {
 				this.$router.push(`/tab/${this.$store.getters.getCurrentTab.id}`);
 			}
-			
 		},
 		computed: {
 			currentTabID() {
@@ -160,9 +131,6 @@
 			},
 			contentID() {
 				return `content${this.currentTabID}`;
-			},
-			isTextualID() {
-				return `isTextual${this.currentTabID}`;
 			},
 			modalLabelUniqueID() {
 				return `noteModalLabel${Math.floor(Math.random() * 10)}`

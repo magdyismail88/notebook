@@ -45,14 +45,14 @@ const actions = {
 		commit('SET_CONTAINER', container);
 		localStorage.setItem('container', container);
 	},
-	changeContainer: ({commit, state}, container_id) => {
-		if(container_id == 0) {
+	changeContainer: ({commit, state}, containerId) => {
+		if(containerId == 0) {
 			commit('SET_CONTAINER', state.defaultContainer);
 			localStorage.setItem('container', JSON.stringify(state.defaultContainer));
 			return false;
 		}
 		return new Promise((resolve, reject) => {
-			axios.get(`http://localhost:8888/api/containers/${container_id}`)
+			axios.get('http://localhost:8888/api/containers/' + containerId)
 			.then((res) => {
 				commit('SET_CONTAINER', res.data);
 				localStorage.setItem('container', JSON.stringify(res.data));
@@ -67,7 +67,7 @@ const actions = {
 	},
 	createContainer: ({commit}, data) => {
 		return new Promise((resolve, reject) => {
-			axios.post("http://localhost:8888/api/containers/create", {
+			axios.post("http://localhost:8888/api/containers", {
 				title: data.title
 			})
 			.then((res) => {
@@ -82,17 +82,15 @@ const actions = {
 	deleteContainer: ({commit}) => {
 		return new Promise((resolve, reject) => {
 			let container = JSON.parse(localStorage.getItem('container'));
-			if(container.id > 0) {
-				axios.post("http://localhost:8888/api/containers/delete", {
-					id: container.id
-				})
-				.then((res) => {
-					resolve(res);
-				})
-				.catch((err) => {
-					console.error(err);
-					reject(err);
-				});
+			if(container.id != null) {
+				axios.delete("http://localhost:8888/api/containers/" + container.id)
+					.then((res) => {
+						resolve(res);
+					})
+					.catch((err) => {
+						console.error(err);
+						reject(err);
+					});
 			} else {
 				console.log("Container is not selected")
 			}
@@ -100,8 +98,7 @@ const actions = {
 	},
 	updateContainer: ({commit}, container) => {
 		return new Promise((resolve, reject) => {
-			axios.post('http://localhost:8888/api/containers/update', {
-				id: container.id,
+			axios.put('http://localhost:8888/api/containers/' + container.id, {
 				title: container.title
 			})
 			.then((res) => {

@@ -72,6 +72,9 @@ export default {
   }
 
   body {
+    /* filter: invert(100%) */
+    /* background-color: #ffffff; */
+    /* Default */
     background-color: #ecf0f1;
     /* background-color:#7f8c8d; */
     /* More Black */

@@ -7,6 +7,6 @@ import (
 const ContainerTable = "containers"
 
 type Container struct {
-	ID    int    `json:"id"`
+	ID    string `json:"id"`
 	Title string `json:"title"`
 }
