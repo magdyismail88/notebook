@@ -69,12 +69,12 @@
 
 				this.$store.dispatch("updateContainer", this.container)
 					.then(() => {
-						flashSuccess("Success Updated!", this);
+						// flashSuccess("Success Updated!", this);
 						this.$store.dispatch('loadContainers');
-						this.$store.dispatch('changeContainer', this.container.id);
 					})
 					.then(() => {
-						document.querySelector('#containerEditModalCloseBtn').click()
+						this.$store.dispatch('changeContainer', this.container.id);
+						document.querySelector('#containerEditModalCloseBtn').click();
 					})
 					.catch((err) => {
 						console.log(err);

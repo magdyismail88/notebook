@@ -46,14 +46,16 @@ const actions = {
 		localStorage.setItem('container', container);
 	},
 	changeContainer: ({commit, state}, containerId) => {
-		if(containerId == 0) {
-			commit('SET_CONTAINER', state.defaultContainer);
-			localStorage.setItem('container', JSON.stringify(state.defaultContainer));
-			return false;
-		}
+		// if(containerId == null || containerId == '') {
+		// 	commit('SET_CONTAINER', state.defaultContainer);
+		// 	localStorage.setItem('container', JSON.stringify(state.defaultContainer));
+		// 	return false;
+		// }
+		console.log('Change container: ', containerId)
 		return new Promise((resolve, reject) => {
 			axios.get('http://localhost:8888/api/containers/' + containerId)
 			.then((res) => {
+				console.log(res.data);
 				commit('SET_CONTAINER', res.data);
 				localStorage.setItem('container', JSON.stringify(res.data));
 				resolve(res);
