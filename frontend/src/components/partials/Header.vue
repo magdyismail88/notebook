@@ -19,14 +19,14 @@
         <li class="nav-item">
           <span class="nav-link">
             <i class="bi bi-chevron-bar-right"></i> {{ selectedContainer }}
-            <!-- <a  href="#"
+            <a  href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#containerEditModal"
                 data-bs-whatever="@getbootstrap"
                 @click="prepareContainerEdit()"
                >
               <i class="bi bi-pencil-square"></i>
-            </a> -->
+            </a>
           </span> 
         </li>
 
@@ -88,8 +88,10 @@
 
       },
       prepareContainerEdit() {
-        document.querySelector('#titleContainerEditModalField').value = 
-          JSON.parse(localStorage.getItem('container')).title || '';
+        setTimeout(() => {
+          const currentContainer = JSON.parse(localStorage.getItem('container'));
+          document.querySelector('#container-title-edit').value = currentContainer.title;
+        }, 100)
       }
 
     },

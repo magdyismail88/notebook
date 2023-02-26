@@ -19,10 +19,10 @@
 				<Flash :status=status :isError=isError :msg=msg />
 	        <form>
 	          <div class="mb-3">
-	            <label for="titleContainerEditModalField" class="col-form-label">Title</label>
+	            <label for="container-title-edit" class="col-form-label">Title</label>
 	            <input type="text" class="form-control" 
-					id="titleContainerEditModalField" 
-	            	v-model="container.title">
+					id="container-title-edit" 
+	            	v-model="title">
 	          </div>
 	        </form>
 	      </div>
@@ -43,16 +43,13 @@
 	import { flashError, flashSuccess } from '../../helpers/utils';
 	export default {
 		name: "ContainerEditForm",
-		emits: ['prepareContainerEdit'],
+		// emits: ['prepareContainerEdit'],
 		components: {
 			Flash
 		},
 		data() {
 			return {
-				container: {
-					id: JSON.parse(localStorage.getItem('container')).id,
-					title: ''
-				},
+				title: '',
 				msg: '',
 				status: false,
 				isError: false
@@ -60,20 +57,24 @@
 		},
 		methods: {
 			updateContainer() {
-				const titleField = (this.container.title).replace(/\s/g, '');
+				const titleField = (this.title).replace(/\s/g, '');
 
 				if(titleField == null || titleField == "") {
 					flashError("Fill the title field", this);
 					return false;
 				}
 
-				this.$store.dispatch("updateContainer", this.container)
+				const currentContainer = JSON.parse(localStorage.getItem('container'));
+				currentContainer.title = this.title;
+
+				console.log('Current container: ' + currentContainer.title);
+
+				this.$store.dispatch("updateContainer", currentContainer)
 					.then(() => {
-						// flashSuccess("Success Updated!", this);
 						this.$store.dispatch('loadContainers');
 					})
 					.then(() => {
-						this.$store.dispatch('changeContainer', this.container.id);
+						this.$store.dispatch('changeContainer', currentContainer.id);
 						document.querySelector('#containerEditModalCloseBtn').click();
 					})
 					.catch((err) => {
