@@ -49,9 +49,16 @@ export default {
     document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => {
         const currentTab = JSON.parse(localStorage.getItem('tab')) || null;
+        const currentContainer = JSON.parse(localStorage.getItem('container'))
+
+        if(currentContainer.id === '') {
+          document.querySelector('#tabs').style.display = 'none';
+        }
+        
         if(currentTab) {
           vm.$router.push('/tab/' + currentTab.id)
         }
+
       }, 1000)
         // setTimeout(function() {
         //   vm.$router.push(vm.currentPath)

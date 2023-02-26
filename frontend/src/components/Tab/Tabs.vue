@@ -1,39 +1,42 @@
 <template>
-	<div class="tabs">
-		<a href="#"
-		
-		   style="margin-left: -14px;
-		    width:246px;
-			line-height: 33px;
-			height: 45px;
-			/* background: linear-gradient(silver, white, white, white); */
-			"
+	<div id="tabs">
+		<div class="tabs">
+			<a href="#"
+			
+			style="margin-left: -14px;
+				width:246px;
+				line-height: 33px;
+				height: 45px;
+				/* background: linear-gradient(silver, white, white, white); */
+				"
 
-           class="border-start-0 btn btn-primary"
-           data-bs-toggle="modal"
-           data-bs-target="#tabModal"
-           data-bs-whatever="@getbootstrap">
-		   <i class="bi bi-plus-square-dotted"></i>&nbsp;Add Tab
-        </a>
-		<!-- <hr class="border border-secondary opacity-75" 
-			style="width: 230px; margin-top: 31px;"> -->
+			class="border-start-0 btn btn-primary"
+			data-bs-toggle="modal"
+			data-bs-target="#tabModal"
+			data-bs-whatever="@getbootstrap">
+			<i class="bi bi-plus-square-dotted"></i>&nbsp;Add Tab
+			</a>
+			<!-- <hr class="border border-secondary opacity-75" 
+				style="width: 230px; margin-top: 31px;"> -->
 
-		<ul class="list-group" style="margin-top: 12px;">
-	      	<router-link 
-	      		v-for="tab in getTabs"
-				style="margin-left: -14px;"
-	            class=" nav-link border-start-0 rounded"
-	            :to="{name: 'Tab', params: {id: tab.id} }"
-				@click="setTitle"
-	            v-bind:key="tab.id">
-	            <li class="list-group-item border-1" style="width: 100%;">
-					<p style="padding: 5px;  margin: 0;">{{ tab.title }}&nbsp; </p>
-				</li>
-	            
-	      	</router-link>
-	    </ul>
-	    <TabForm />
+			<ul class="list-group" style="margin-top: 12px;">
+				<router-link 
+					v-for="tab in getTabs"
+					style="margin-left: -14px;"
+					class=" nav-link border-start-0 rounded"
+					:to="{name: 'Tab', params: {id: tab.id} }"
+					@click="setTitle"
+					v-bind:key="tab.id">
+					<li class="list-group-item border-1" style="width: 100%;">
+						<p style="padding: 5px;  margin: 0;">{{ tab.title }}&nbsp; </p>
+					</li>
+					
+				</router-link>
+			</ul>
+			<TabForm />
+		</div>
 	</div>
+	<!-- <div v-else></div> -->
 </template>
 
 <script>
@@ -57,16 +60,19 @@
 					return false;
 				}
 				this.$store.dispatch('removeTab', tabId)
-				.then(() => {
-					this.$store.dispatch('loadTabs');
-					this.$router.push('/');
-				});
+					.then(() => {
+						this.$store.dispatch('loadTabs');
+						this.$router.push('/');
+					});
 			},
 			setTitle() {
 				setTimeout(() => {
 					const currentTab = JSON.parse(localStorage.getItem('tab'));
 					document.querySelector('#title-' + currentTab.id).value = currentTab.title;
 				}, 100);
+			},
+			containerExists() {
+				return JSON.parse(localStorage.getItem('container')).id != '';
 			}
 		},
 		watch: {

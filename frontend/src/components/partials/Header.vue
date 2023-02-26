@@ -39,6 +39,7 @@
            class="nav-link text-primary"
            data-bs-toggle="modal"
            data-bs-target="#containerChangeModal"
+           onchange="alert('dd')"
            data-bs-whatever="@getbootstrap">
            <i class="bi bi-caret-down"></i>&nbsp;Change
           </a>
@@ -75,15 +76,17 @@
         const check = confirm("Are you sure ?");
 
         if(check) {
+          
           this.$store.dispatch('deleteContainer')
-          .then(() => {
-            localStorage.removeItem('tab')
-            this.$store.dispatch('loadContainers');
-            this.$store.dispatch('setDefaultContainer')
-            this.$store.dispatch('changeContainer', 0);
-            this.$router.push('/');
-          })
-          .catch((err) => console.log(err));
+            .then(() => {
+              localStorage.removeItem('tab');
+              this.$store.dispatch('loadContainers');
+              this.$store.dispatch('setDefaultContainer');
+              this.$store.dispatch('changeContainer', 0);
+              document.querySelector('#tabs').style.display = 'none'
+              this.$router.push('/');
+            })
+            .catch((err) => console.log(err));
         }
 
       },
