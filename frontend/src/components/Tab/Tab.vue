@@ -10,7 +10,8 @@
 							data-bs-toggle="modal"
 							:data-bs-target="tabEditUniqueID"
 							data-bs-whatever="@getbootstrap">
-							&nbsp;&nbsp;<i class="bi bi-pencil-square"> Edit</i>
+							&nbsp;&nbsp;<i class="bi bi-pencil-square"
+							> Edit</i>
 						</a>
 
 						<a href="#" 

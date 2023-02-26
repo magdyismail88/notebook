@@ -54,15 +54,15 @@
 				}
 
 				this.$store.dispatch('createTab', { title: this.title })
-				.then(() => {
-					this.$store.dispatch('loadTabs');
-					flashSuccess("Created Successfully", this);
-					this.title = '';
-				})
-				.then(() => {
-					document.querySelector('#tab-btn-close').click()
-				})
-				.catch((err) => console.log(err));
+					.then(() => {
+						this.$store.dispatch('loadTabs');
+						flashSuccess("Created Successfully", this);
+						this.title = '';
+					})
+					.then(() => {
+						document.querySelector('#tab-btn-close').click()
+					})
+					.catch((err) => console.log(err));
 			}
 		},
 		computed: {

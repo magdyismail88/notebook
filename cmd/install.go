@@ -37,7 +37,7 @@ func buildFrontend() error {
 		return err
 	}
 	fmt.Println("Built for production")
-	os.Chdir("../")
+	os.Chdir("..")
 	return nil
 }
 
@@ -55,12 +55,12 @@ func buildBackend() error {
 	if err := b.Run(); err != nil {
 		return fmt.Errorf("build app field!: %s", err)
 	}
-	os.Chdir("../")
-	if err := util.MoveFile(path.Join("server", "server"), "bin/notebook-bin"); err != nil {
+	os.Chdir("..")
+	if err := util.MoveFile(path.Join("server", "server"), path.Join("bin", "notebook-bin")); err != nil {
 		return fmt.Errorf("Invalid move file")
 	}
 	if runtime.GOOS != "windows" {
-		err = os.Chmod("bin/notebook-bin", 0700)
+		err = os.Chmod(path.Join("bin", "notebook-bin"), 0700)
 	}
 	if err != nil {
 		return err

@@ -12,9 +12,9 @@
 
 	        <form>
 	          <div class="mb-3">
-	            <label :for="titleUniqueID" class="col-form-label">Title</label>
-	            <input type="text" class="form-control" :id="titleUniqueID" 
-	            v-model="title">
+	            <label :for='titleId' class="col-form-label">Title</label>
+	            <input type="text" class="form-control" :id="titleId" 
+	            	v-model="title">
 	          </div>
 	        </form>
 	      </div>
@@ -36,11 +36,6 @@
 	export default {
 		name: 'TabEditForm',
 		props: ['t'],
-		mounted() {
-			setTimeout(() => {
-				this.title = this.t.title
-			}, 3000)
-		},
 		data() {
 			return {
 				msg: '',
@@ -62,13 +57,17 @@
 					return false;
 				}
 
-				this.t.title = this.title;
+				// this.t.title = this.title;
 
-				this.$store.dispatch('updateTab', this.t)
+				const currentTab = JSON.parse(localStorage.getItem('tab'));
+				currentTab.title = this.title;
+
+				this.$store.dispatch('updateTab', currentTab)
 					.then(() => {
 						// this.t.title = this.title
 						this.$store.dispatch('loadTabs');
-						flashSuccess("Updated Successfully", this);
+						this.t.title = this.title
+						// flashSuccess("Updated Successfully", this);
 					})
 					.then(() => {
 						document.querySelector('#tab-edit-btn-close').click();
@@ -80,8 +79,8 @@
 			uniqueID() {
 				return `tabEditModal${this.t.id}`;
 			},
-			titleUniqueID() {
-				return `titleField${this.t.id}`;
+			titleId() {
+				return 'title-' + this.t.id;
 			},
 			modalLabelUniqueID() {
 				return `tabEditModalLabel${Math.floor(Math.random() * 10)}`

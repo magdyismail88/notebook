@@ -42,7 +42,7 @@
 		methods: {
 			removeNote() {
 
-				let check = confirm("Are you sure?");
+				const check = confirm("Are you sure?");
 
 				if(!check) {
 					return false;

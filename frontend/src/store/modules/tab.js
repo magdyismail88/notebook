@@ -80,7 +80,6 @@ const actions = {
 			axios.get('http://localhost:8888/api/tabs/' + tabId)
 					.then((res) => {
 						commit('SET_CURRENT_TAB', res.data);
-						console.log('TAB', res.data);
 						localStorage.setItem('tab', JSON.stringify(res.data))
 						resolve(res);
 					})

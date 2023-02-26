@@ -24,6 +24,7 @@
 				style="margin-left: -14px;"
 	            class=" nav-link border-start-0 rounded"
 	            :to="{name: 'Tab', params: {id: tab.id} }"
+				@click="setTitle"
 	            v-bind:key="tab.id">
 	            <li class="list-group-item border-1" style="width: 100%;">
 					<p style="padding: 5px;  margin: 0;">{{ tab.title }}&nbsp; </p>
@@ -50,17 +51,26 @@
 			this.$store.dispatch('loadTabs');
 		},
 		methods: {
-			removeTab(tab_id) {
+			removeTab(tabId) {
 				const check = confirm("Are you sure?");
 				if(check === false) {
 					return false;
 				}
-				this.$store.dispatch('removeTab', tab_id)
+				this.$store.dispatch('removeTab', tabId)
 				.then(() => {
 					this.$store.dispatch('loadTabs');
 					this.$router.push('/');
-				})
+				});
+			},
+			setTitle() {
+				setTimeout(() => {
+					const currentTab = JSON.parse(localStorage.getItem('tab'));
+					document.querySelector('#title-' + currentTab.id).value = currentTab.title;
+				}, 100);
 			}
+		},
+		watch: {
+			'$route': 'setTitle'
 		}
 	};
 </script>
