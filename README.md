@@ -43,9 +43,9 @@ localhost:8888
 
 ### Example
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/master/assets/screenshot-01?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/d5a9444785803b91dc5dba888cb8e6e430fcf576/assets/01.png?raw=true")
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/master/assets/screenshot-02?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/d5a9444785803b91dc5dba888cb8e6e430fcf576/assets/02.png?raw=true")
 
 ![Screenshot](https://github.com/magdyismail88/notebook/blob/master/assets/screenshot-03?raw=true")
 
