@@ -56,18 +56,14 @@
 					flashError("Fill the title field", this);
 					return false;
 				}
-
-				// this.t.title = this.title;
-
+				
 				const currentTab = JSON.parse(localStorage.getItem('tab'));
 				currentTab.title = this.title;
 
 				this.$store.dispatch('updateTab', currentTab)
 					.then(() => {
-						// this.t.title = this.title
 						this.$store.dispatch('loadTabs');
 						this.t.title = this.title
-						// flashSuccess("Updated Successfully", this);
 					})
 					.then(() => {
 						document.querySelector('#tab-edit-btn-close').click();
