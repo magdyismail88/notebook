@@ -59,11 +59,12 @@
 				this.$store.dispatch("createContainer", { title: this.title })
 					.then(() => {
 						this.title = '';
-						flashSuccess("Success Created!", this);
 						this.$store.dispatch('loadContainers');
 					})
-					.then(() => {
-						// localStorage.removeItem('tab');
+					.then(container => {
+						localStorage.removeItem('tab');
+						// document.querySelector('#container-edit-btn').style.display = 'block-inline'
+						// document.querySelector('#container-remove-btn').style.display = 'block'
 						document.querySelector('#container-btn-close').click();
 					})
 					.catch((err) => {

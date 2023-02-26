@@ -20,6 +20,7 @@
           <span class="nav-link">
             <i class="bi bi-chevron-bar-right"></i> {{ selectedContainer }}
             <a  href="#"
+                id="container-edit-btn"
                 data-bs-toggle="modal"
                 data-bs-target="#containerEditModal"
                 data-bs-whatever="@getbootstrap"
@@ -39,7 +40,6 @@
            class="nav-link text-primary"
            data-bs-toggle="modal"
            data-bs-target="#containerChangeModal"
-           onchange="alert('dd')"
            data-bs-whatever="@getbootstrap">
            <i class="bi bi-caret-down"></i>&nbsp;Change
           </a>
@@ -56,7 +56,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link text-danger" @click="deleteCurrentContainer">
+          <a href="#" id="container-remove-btn" class="nav-link text-danger" @click="deleteCurrentContainer">
             <i class="bi bi-trash"></i>&nbsp;Remove
           </a>
         </li>
@@ -74,9 +74,7 @@
     methods: {
       deleteCurrentContainer() {
         const check = confirm("Are you sure ?");
-
         if(check) {
-          
           this.$store.dispatch('deleteContainer')
             .then(() => {
               localStorage.removeItem('tab');
@@ -84,6 +82,8 @@
               this.$store.dispatch('setDefaultContainer');
               this.$store.dispatch('changeContainer', 0);
               document.querySelector('#tabs').style.display = 'none'
+              document.querySelector('#container-edit-btn').style.display = 'none'
+              document.querySelector('#container-remove-btn').style.display = 'none'
               this.$router.push('/');
             })
             .catch((err) => console.log(err));

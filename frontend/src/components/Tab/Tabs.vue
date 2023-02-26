@@ -70,9 +70,6 @@
 					const currentTab = JSON.parse(localStorage.getItem('tab'));
 					document.querySelector('#title-' + currentTab.id).value = currentTab.title;
 				}, 100);
-			},
-			containerExists() {
-				return JSON.parse(localStorage.getItem('container')).id != '';
 			}
 		},
 		watch: {

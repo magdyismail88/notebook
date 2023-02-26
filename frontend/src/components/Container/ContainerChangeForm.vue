@@ -11,7 +11,7 @@
 
 	        <form>
 	          <div class="mb-3">
-	            <select class="form-control" 
+	            <select class="form-control" id="container-change-select"
 	            		v-model="containerId" 
 	            		@change="changingContainer">
 
@@ -49,10 +49,10 @@
 			changingContainer() {
 				this.$store.dispatch("changeContainer", this.containerId)
 				.then(() => {
-					
-					localStorage.removeItem('tab')
-
+					localStorage.removeItem('tab');
 					document.querySelector('#tabs').style.display = 'block'
+					document.querySelector('#container-edit-btn').style.display = 'inline'
+					document.querySelector('#container-remove-btn').style.display = 'block'
 
 					if(this.$route.path != '/') {
 						this.$router.push('/');
