@@ -23,14 +23,16 @@ const actions = {
 	loadTabs: ({commit}) => {
 		return new Promise((resolve, reject) => {
 			const container = JSON.parse(localStorage.getItem("container"));
-			axios.get('http://localhost:8888/api/tabs/' + container.id + '/tabs')
-			.then((res) => {
-				commit('SET_TABS', res.data);
-				resolve(res);
-			})
-			.catch((err) => {
-				reject(err);
-			})
+			if(container && container.id !== '') {
+				axios.get('http://localhost:8888/api/tabs/' + container.id + '/tabs')
+					.then((res) => {
+						commit('SET_TABS', res.data);
+						resolve(res);
+					})
+					.catch((err) => {
+						reject(err);
+					})
+			}
 		});
 	},
 	createTab: ({commit}, data) => {

@@ -6,7 +6,7 @@
     <ContainerEditForm />
     <div class="row" style="margin-top: 100px !important;">
       <div class="col-2 app-tabs">
-        <Tabs v-show="containerExists" />
+        <Tabs />
       </div>
       <div class="col-10">
         <router-view />
@@ -51,7 +51,7 @@ export default {
         const currentTab = JSON.parse(localStorage.getItem('tab')) || null;
         const currentContainer = JSON.parse(localStorage.getItem('container'))
 
-        if(currentContainer.id === '') {
+        if(currentContainer && currentContainer.id == '') {
           document.querySelector('#tabs').style.display = 'none';
           document.querySelector('#container-edit-btn').style.display = 'none'
           document.querySelector('#container-remove-btn').style.display = 'none'
@@ -71,16 +71,6 @@ export default {
         //   // vm.$store.dispatch('loadTabs');
         // }, 1000)
     }, false);
-  },
-  methods: {
-    containerExists() {
-      const currentContainer = JSON.parse(localStorage.getItem('container'));
-      if(currentContainer.id === '') {
-        return false;
-      } else {
-        return true;
-      }
-    }
   }
 };
 </script>

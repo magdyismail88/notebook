@@ -1,16 +1,19 @@
 <template>
   <div id="home">
-  	Navigate notes accross tabs
-
+  	No tab selected
   </div>
 </template>
 
 <script>
-
 	export default {
 	 	name: 'Home',
 	 	mounted() {
-	 		this.$store.dispatch('loadTabs');
+			const currentContainer = JSON.parse(
+				localStorage.getItem('container')
+			)
+			if(currentContainer && currentContainer.id !== '') {
+				this.$store.dispatch('loadTabs');
+			}
 		}
   };
 </script>
