@@ -43,13 +43,13 @@ localhost:8888
 
 ### Example
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/d5a9444785803b91dc5dba888cb8e6e430fcf576/assets/01.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/0c600ec2e2689f009e00100825c6a09d44208a62/assets/01.png?raw=true")
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/d5a9444785803b91dc5dba888cb8e6e430fcf576/assets/02.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/0c600ec2e2689f009e00100825c6a09d44208a62/assets/02.png?raw=true")
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/8bacf0d64a3e4585dedd7c37f8f9cf73a4c8d90c/assets/03.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/0c600ec2e2689f009e00100825c6a09d44208a62/assets/03.png?raw=true")
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/8bacf0d64a3e4585dedd7c37f8f9cf73a4c8d90c/assets/04.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/0c600ec2e2689f009e00100825c6a09d44208a62/assets/04.png?raw=true")
 
 
 ### Application Structure
