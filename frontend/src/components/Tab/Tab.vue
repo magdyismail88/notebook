@@ -5,7 +5,7 @@
 				<tr>
 					<td>
 						<span class="h2">{{ currentTab.title }}</span>
-						
+
 						<a  href="#"
 							data-bs-toggle="modal"
 							:data-bs-target="tabEditUniqueID"
@@ -14,16 +14,16 @@
 							> Edit</i>
 						</a>
 
-						<a href="#" 
-							class="btn text-danger" 
+						<a href="#"
+							class="btn text-danger"
 							@click="removeTab(currentTab.id)">
 							<span><i class="bi bi-trash"></i> Remove</span>
 						</a>
 
 					</td>
 					<td>
-						<router-link to="/note/new" 
-							style="width: 140px; margin-right: -40px;"
+						<router-link to="/note/new"
+							style="width: 140px; float: right;"
 							class="btn btn-primary bg-primary">
 							<i class="bi bi-plus-square-dotted"></i> Add Note
 						</router-link>
@@ -102,8 +102,10 @@
 	#tab {
 		z-index: -1;
 		padding: 20px;
-		min-height: 1000px;
+		min-height: 900px;
+		width: 98%;
 		border: 1px solid silver;
+		/* overflow: hidden; */
 	}
 	a {
 		text-decoration: none;

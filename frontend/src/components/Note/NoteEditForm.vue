@@ -5,7 +5,7 @@
 		<Flash :status=status :isError=isError :msg=msg />
 		
 		<div class="card shadow-sm">
-			<div class="card-header">
+			
 				<div class="modal-header">
 			        <!-- <h5 class="modal-title"></h5> -->
 			        <button type="button" 
@@ -13,7 +13,7 @@
 			        		aria-label="Close" 
 			        	    @click="backToParentTab"></button>
 			    </div>
-		    </div>
+		    
 
 			<div class="card-body">
 				<form class="mt-2">
@@ -23,6 +23,11 @@
 						       class="form-control" 
 						       v-model="note.title" placeholder="Type title">
 					</div>
+
+					<a href="javascript:void(0)" 
+						style="text-decoration:none;margin-top: 10px;" 
+						@click="updatingNote"
+						><i class="bi bi-save"></i> Save</a>
 
 					<div class="form-group mt-4">
 						<froala :tag="'textarea'"
@@ -44,7 +49,8 @@
 					</div> -->
 
 					<div class="form-group mt-4">
-						<button type="button" class="btn btn-primary" @click="updatingNote">Save</button>
+						<button type="button" class="btn btn-primary"
+						 @click="updatingNote">Save</button>
 					</div>
 
 				</form>
@@ -77,7 +83,7 @@
 			            console.log('initialized')
 			          }
 			        },
-					height: '340px',
+					height: '800px',
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',

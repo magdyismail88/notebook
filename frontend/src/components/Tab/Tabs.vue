@@ -22,7 +22,7 @@
 			<ul class="list-group" style="margin-top: 12px;">
 				<router-link 
 					v-for="tab in getTabs"
-					style="margin-left: -14px;"
+					style="margin-left: -14px; width: 260px;"
 					class=" nav-link border-start-0 rounded"
 					:to="{name: 'Tab', params: {id: tab.id} }"
 					@click="setTitle"

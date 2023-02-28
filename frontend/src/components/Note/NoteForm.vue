@@ -3,36 +3,44 @@
 	<div class="container">
 
 		<Flash :status=status :isError=isError :msg=msg />
-		
+
 		<div class="card shadow-sm">
-			<div class="card-header">
+
 				<div class="modal-header">
 			        <!-- <h5 class="modal-title" id="ddd">New Note</h5> -->
 			        <button type="button"
-						class="btn-close" 
+						class="btn-close"
 						aria-label="Close"
 						@click="backToParentTab"></button>
 	     		</div>
-			</div>
+
 
 			<div class="card-body">
 				<form class="mt-2">
 
 					<div class="form-group col-md-6">
-						<input type="text" class="form-control" v-model="title" placeholder="Type title">
+						<input type="text" 
+							class="form-control" 
+							v-model="title"
+							placeholder="Type title">
 					</div>
+		
+					<a href="javascript:void(0)" 
+						style="text-decoration:none;margin-top: 10px;" 
+						@click="newNote"
+						><i class="bi bi-save"></i> Save</a>
 
 					<div class="form-group mt-4">
 
 						<froala :tag="'textarea'"
 							:config="config"
-							v-model="content">		
+							v-model="content">
 						</froala>
 					</div>
 
 					<div class="form-group mt-4">
-						<button type="button" 
-								class="btn btn-primary" 
+						<button type="button"
+								class="btn btn-primary"
 								@click="newNote">Save</button>
 					</div>
 
@@ -60,7 +68,7 @@
 			            console.log('initialized')
 			          }
 			        },
-					height: '340px',
+					height: '800px',
 			        imageUpload: true,
 			        imageUploadMethod: 'POST',
 			        imageUploadParam: 'file',
@@ -135,9 +143,17 @@
 			modalLabelUniqueID() {
 				return `noteModalLabel${Math.floor(Math.random() * 10)}`
 			}
+		},
+		watch: {
+			keyup: {
+				print: function() {
+					alert('ddd')
+				}
+			}
 		}
 	};
 </script>
+
 
 <style scoped>
 	.div-block {
