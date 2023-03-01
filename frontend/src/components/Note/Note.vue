@@ -2,7 +2,17 @@
 	<div id="note" class="col-3 mt-4" style="margin-top: 36px !important;">
 		<div style="background-color:#fdcb6e;" class="shadow-sm">
 			<div class="card-header d-flex justify-content-between">
-				{{ note.title | short }} <a href="#" @click="removeNote" class="ml-auto float-right">&times;</a>
+				{{ note.title | short }} 
+				<!-- <a href="#" @click="removeNote" class="ml-auto float-right">&times;</a> -->
+				<div class="dropdown">
+  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Actions
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="javascript:void(0)" @click="moveTo"><i class="bi bi-arrows-move"></i> Move</a></li>
+    <li><a href="javascript:void(0)" @click="removeNote" class="dropdown-item text-danger"><i class="bi bi-trash"></i> Remove</a></li>
+  </ul>
+</div>
 			</div>
 			<!-- <div class="card-body">{{ note.content | short }}</div> -->
 			<router-link 
@@ -41,15 +51,16 @@
 		},
 		methods: {
 			removeNote() {
-
 				const check = confirm("Are you sure?");
-
 				if(!check) {
 					return false;
 				}
-
 				this.$store.dispatch('destroyNote', this.note.id)
-				.then((res) => this.$store.dispatch('loadNotes', this.note.tabId));
+					.then((res) => this.$store.dispatch('loadNotes', this.note.tabId));
+			},
+			moveTo() {
+				const to = prompt('');
+				alert(to)
 			}
 		},
 		components: {

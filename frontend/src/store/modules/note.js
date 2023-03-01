@@ -88,6 +88,18 @@ const actions = {
 					reject(err);
 				});
 		});
+	},
+	moveTo: ({commit}, query) => {
+		return new Promise((resolve, reject) => {
+			axios.post('http://localhost:8888/api/notes/move-to' + noteId)
+				.then(res => {
+					resolve(res)
+				})
+				.catch((err) => {
+					console.log(err);
+					reject(err);
+				});
+		})
 	}
 
 };
