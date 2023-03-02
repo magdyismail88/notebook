@@ -11,7 +11,7 @@
 
 	        <form>
 	          <div class="mb-3">
-				<select @change="moveTo" class="form-control" v-model="tabId">
+				<select @change="moveTo" id="note-move-select" class="form-control" v-model="tabId">
 					<option disabled></option>
 					<option v-for="elem in getContainersAndTabs"
 						:value="elem.tabId" 
@@ -47,6 +47,7 @@
 				this.$store.dispatch('moveTo', {noteId: note.id, tabId: this.tabId})
 					.then(() => {
 						this.$store.dispatch('loadNotes', note.tabId);
+						// document.querySelector('#note-move-select').reset()
 						document.querySelector('#note-move-close-btn').click();
 					})
 					.catch((err) => {
