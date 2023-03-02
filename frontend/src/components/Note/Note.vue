@@ -5,8 +5,10 @@
 				{{ note.title | short }}
 				<!-- <a href="#" @click="removeNote" class="ml-auto float-right">&times;</a> -->
 				<div class="dropdown">
-  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Actions
+  <button class="btn btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <!-- <i class="bi bi-gear-fill"></i> -->
+	<!-- <i class="bi bi-sliders"></i> -->
+	<i class="bi bi-three-dots"></i>
   </button>
   <ul class="dropdown-menu">
     <li>
