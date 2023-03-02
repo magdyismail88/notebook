@@ -110,5 +110,47 @@ func (nc *NoteController) Destroy(w http.ResponseWriter, r *http.Request) {
 }
 
 func (nc *NoteController) FetchAllContainersWithTabs(w http.ResponseWriter, r *http.Request) {
+	writeHeader(w, http.StatusOK)
 
+	// vars := mux.Vars(r)
+	// id := vars["id"]
+
+	containersAndTabs, err := nc.NoteService.GetContainersAndTabs()
+
+	if err != nil {
+		panic(err)
+	}
+
+	json.NewEncoder(w).Encode(&containersAndTabs)
+	return
+}
+
+func (nc *NoteController) ChangeTab(w http.ResponseWriter, r *http.Request) {
+	writeHeader(w, http.StatusNoContent)
+
+	// var form struct {
+	// 	noteID string `json:"noteId"`
+	// 	tabID  string `json:"tabId"`
+	// }
+
+	var form noteForm
+
+	_ = json.NewDecoder(r.Body).Decode(&form)
+
+	note, err := nc.NoteService.FindOne(form.ID)
+
+	if err != nil {
+		panic(err)
+	}
+
+	note.TabID = form.TabID
+	// log.Println("form TABID", form.ID)
+	err = nc.NoteService.UpdateTabID(note)
+
+	if err != nil {
+		panic(err)
+	}
+
+	io.WriteString(w, `{"success": true}`)
+	return
 }

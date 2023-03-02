@@ -27,6 +27,9 @@ func (k *kernel) SetupApiRoutes(r *mux.Router, env *bootstrap.Env) {
 	r.HandleFunc("/api/notes", k.NoteCtrl.Create).Methods(http.MethodPost) // Create note
 	r.HandleFunc("/api/notes/{id}", k.NoteCtrl.Update).Methods(http.MethodPut)
 	r.HandleFunc("/api/notes/{id}", k.NoteCtrl.Destroy).Methods(http.MethodDelete)
+	r.HandleFunc("/api/actions/move-note-to", k.NoteCtrl.ChangeTab).Methods(http.MethodPut)
+
+	r.HandleFunc("/api/containers-tabs", k.NoteCtrl.FetchAllContainersWithTabs).Methods(http.MethodGet)
 
 	r.HandleFunc("/api/upload", k.UploaderCtrl.Upload)
 	// r.PathPrefix("/tab/[0-9]+").Handler(http.FileServer(http.Dir("./frontend/dist")))

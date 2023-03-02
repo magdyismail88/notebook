@@ -5,7 +5,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" :id="modalLabelUniqueID">Move to</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <button type="button" id="note-move-close-btn" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 
@@ -32,7 +32,6 @@
 		name: "NoteMoveTo",
 		data() {
 			return {
-				containersAndTabs: [],
 				tabId: ''
 			}
 		},
@@ -48,6 +47,7 @@
 				this.$store.dispatch('moveTo', {noteId: note.id, tabId: this.tabId})
 					.then(() => {
 						this.$store.dispatch('loadNotes', note.tabId);
+						document.querySelector('#note-move-close-btn').click();
 					})
 					.catch((err) => {
 						console.log(err);

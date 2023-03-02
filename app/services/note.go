@@ -92,16 +92,17 @@ func (ns *NoteService) Update(note *models.Note) error {
 	return nil
 }
 
-func (ns *NoteService) GetContainersAndTabs() string {
+func (ns *NoteService) GetContainersAndTabs() ([]interface{}, error) {
 	query := `
-		SELECT %s.title, %s.title
-		FROM %
-		INNER JOIN %
-		ON %.id = %.container_id
+		SELECT %s.title, %s.id, %s.title
+		FROM %s
+		INNER JOIN %s
+		ON %s.id = %s.container_id
 	`
 	stmt := fmt.Sprintf(
 		query,
 		models.ContainerTable,
+		models.TabTable,
 		models.TabTable,
 		models.ContainerTable,
 		models.TabTable,
@@ -109,7 +110,25 @@ func (ns *NoteService) GetContainersAndTabs() string {
 		models.TabTable,
 	)
 
-	return stmt
+	rows, err := ns.db.Query(stmt)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var containersTabs []interface{}
+
+	for rows.Next() {
+		var containerTab struct {
+			ContainerTitle string `json:"containerTitle"`
+			TabID          string `json:"tabId"`
+			TabTitle       string `json:"tabTitle"`
+		}
+		rows.Scan(&containerTab.ContainerTitle, &containerTab.TabID, &containerTab.TabTitle)
+		containersTabs = append(containersTabs, containerTab)
+	}
+
+	return containersTabs, nil
 }
 
 func (ns *NoteService) Delete(id string) error {
@@ -128,16 +147,22 @@ func (ns *NoteService) Delete(id string) error {
 	return nil
 }
 
-// func (ns *NoteService) MoveTo(id, query string) error {
-// 	// delete current note by id
-// 	// split query by > symbol
-// 	// first element is container, second element is tab
-// 	// if split has two element so move to container > tab
-// 	// if split has one element so move to another tab
-// 	elements := strings.Split(query, ">")
+func (ns *NoteService) UpdateTabID(note *models.Note) error {
+	stmt := fmt.Sprintf("UPDATE `%s` SET tab_id = ? WHERE id = ?", models.NoteTable)
 
-// 	return nil
-// }
+	res, err := ns.db.Prepare(stmt)
+	if err != nil {
+		return err
+	}
+
+	_, err = res.Exec(note.TabID, note.ID)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
 
 func sanitizeHTML(content string) (contentText string) {
 	// allowingChars := []string{"<p>", "</p>"}

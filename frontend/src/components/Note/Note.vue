@@ -70,7 +70,7 @@
 			setNote() {
 				localStorage.setItem('note', JSON.stringify(this.note))
 				this.$store.dispatch('loadContainersAndTabs')
-					.then(res => {
+					.then(() => {
 						console.log('Containers and tabs have loaded!');
 					})
 					.catch(err => {

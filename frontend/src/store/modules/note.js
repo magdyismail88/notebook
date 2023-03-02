@@ -107,12 +107,9 @@ const actions = {
 				});
 		})
 	},
-	loadContainersAndTabs: ({commit}) => {
-
-	},
 	moveTo: ({commit}, data) => {
 		return new Promise((resolve, reject) => {
-			axios.put('http://localhost:8888/api/notes/move-to', {
+			axios.put('http://localhost:8888/api/actions/move-note-to', {
 				id: data.noteId,
 				tabId: data.tabId
 			})
