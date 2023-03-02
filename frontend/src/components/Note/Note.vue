@@ -73,6 +73,7 @@
 				localStorage.setItem('note', JSON.stringify(this.note))
 				this.$store.dispatch('loadContainersAndTabs')
 					.then(() => {
+						document.querySelector('#note-move-select').selectedIndex = 0;
 						console.log('Containers and tabs have loaded!');
 					})
 					.catch(err => {
