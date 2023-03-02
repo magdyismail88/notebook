@@ -92,6 +92,26 @@ func (ns *NoteService) Update(note *models.Note) error {
 	return nil
 }
 
+func (ns *NoteService) GetContainersAndTabs() string {
+	query := `
+		SELECT %s.title, %s.title
+		FROM %
+		INNER JOIN %
+		ON %.id = %.container_id
+	`
+	stmt := fmt.Sprintf(
+		query,
+		models.ContainerTable,
+		models.TabTable,
+		models.ContainerTable,
+		models.TabTable,
+		models.ContainerTable,
+		models.TabTable,
+	)
+
+	return stmt
+}
+
 func (ns *NoteService) Delete(id string) error {
 	stmt := fmt.Sprintf("DELETE FROM `%s` WHERE id = ?", models.NoteTable)
 	res, err := ns.db.Prepare(stmt)
@@ -107,6 +127,17 @@ func (ns *NoteService) Delete(id string) error {
 
 	return nil
 }
+
+// func (ns *NoteService) MoveTo(id, query string) error {
+// 	// delete current note by id
+// 	// split query by > symbol
+// 	// first element is container, second element is tab
+// 	// if split has two element so move to container > tab
+// 	// if split has one element so move to another tab
+// 	elements := strings.Split(query, ">")
+
+// 	return nil
+// }
 
 func sanitizeHTML(content string) (contentText string) {
 	// allowingChars := []string{"<p>", "</p>"}

@@ -108,3 +108,7 @@ func (nc *NoteController) Destroy(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, `{"success": true}`)
 	return
 }
+
+func (nc *NoteController) FetchAllContainersWithTabs(w http.ResponseWriter, r *http.Request) {
+
+}

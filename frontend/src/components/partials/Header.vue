@@ -36,14 +36,14 @@
       <span class="navbar-text">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-          <a href="#"
-           class="nav-link text-primary"
-           data-bs-toggle="modal"
-           data-bs-target="#containerChangeModal"
-           data-bs-whatever="@getbootstrap">
-           <i class="bi bi-caret-down"></i>&nbsp;Change
-          </a>
-        </li>
+            <a href="#"
+            class="nav-link text-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#containerChangeModal"
+            data-bs-whatever="@getbootstrap">
+            <i class="bi bi-caret-down"></i>&nbsp;Change
+            </a>
+          </li>
 
         <li class="nav-item">
           <a href="#"

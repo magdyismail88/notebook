@@ -3,6 +3,7 @@
     <Header />
     <ContainerForm />
     <ContainerChangeForm />
+    <NoteMoveTo />
     <ContainerEditForm />
     <div class="row" style="margin-top: 100px !important;">
       <div class="col-2 app-tabs">
@@ -21,6 +22,7 @@ import Tabs from "./components/Tab/Tabs";
 import ContainerForm from './components/Container/ContainerForm';
 import ContainerChangeForm from './components/Container/ContainerChangeForm';
 import ContainerEditForm from './components/Container/ContainerEditForm';
+import NoteMoveTo from "./components/Note/NoteMoveTo.vue";
 
 export default {
   name: 'App',
@@ -35,7 +37,8 @@ export default {
     Tabs,
     ContainerForm,
     ContainerChangeForm,
-    ContainerEditForm
+    ContainerEditForm,
+    NoteMoveTo
   },
   created() {
     const vm = this

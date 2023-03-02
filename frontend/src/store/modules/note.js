@@ -89,9 +89,11 @@ const actions = {
 				});
 		});
 	},
-	moveTo: ({commit}, query) => {
+	moveTo: ({commit}, tabId) => {
 		return new Promise((resolve, reject) => {
-			axios.post('http://localhost:8888/api/notes/move-to' + noteId)
+			axios.post('http://localhost:8888/api/notes/move-to' + noteId, {
+				tabId
+			})
 				.then(res => {
 					resolve(res)
 				})

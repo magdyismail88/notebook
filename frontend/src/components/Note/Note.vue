@@ -9,7 +9,17 @@
     Actions
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="javascript:void(0)" @click="moveTo"><i class="bi bi-arrows-move"></i> Move</a></li>
+    <li>
+		<a href="#"
+            class="nav-link text-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#noteMoveToModal"
+            data-bs-whatever="@getbootstrap">
+			<i class="bi bi-arrows-move"></i> Move
+        </a>
+			
+	
+	</li>
     <li><a href="javascript:void(0)" @click="removeNote" class="dropdown-item text-danger"><i class="bi bi-trash"></i> Remove</a></li>
   </ul>
 </div>
