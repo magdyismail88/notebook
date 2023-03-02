@@ -11,8 +11,11 @@
 
 	        <form>
 	          <div class="mb-3">
-				<select class="form-control">
-					<option>Container > Tab</option>
+				<select @change="moveTo" class="form-control" v-model="tabId">
+					<option disabled></option>
+					<option v-for="elem in getContainersAndTabs"
+						:value="elem.tabId" 
+						>{{ elem.containerTitle }} > {{ elem.tabTitle }}</option>
 				</select>
 	          </div>
 	        </form>
@@ -29,19 +32,27 @@
 		name: "NoteMoveTo",
 		data() {
 			return {
-				containerId: null,
-				tabId
+				containersAndTabs: [],
+				tabId: ''
 			}
 		},
 		computed: {
-			...mapGetters(['getContainers', 'getTabs']),
+			...mapGetters(['getContainersAndTabs']),
 			modalLabelUniqueID() {
 				return `noteMoveToModalLabel${Math.floor(Math.random() * 10)}`;
 			}
 		},
 		methods: {
 			moveTo() {
-				return
+				const note = JSON.parse(localStorage.getItem('note'));
+				this.$store.dispatch('moveTo', {noteId: note.id, tabId: this.tabId})
+					.then(() => {
+						this.$store.dispatch('loadNotes', note.tabId);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+
 			}
 		}
 	};

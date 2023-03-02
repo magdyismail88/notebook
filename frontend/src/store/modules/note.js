@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const state = {
 	notes: [],
-	note: {}
+	note: {},
+	containersAndTabs: []
 };
 
 const mutations = {
@@ -11,12 +12,16 @@ const mutations = {
 	},
 	'SET_NOTE' (state, note) {
 		state.note = note;
+	},
+	'SET_CONTAINERS_AND_TABS' (state, containersAndTabs) {
+		state.containersAndTabs = containersAndTabs
 	}
 };
 
 const getters = {
 	getNotes: state => state.notes,
-	getNote: state => state.note
+	getNote: state => state.note,
+	getContainersAndTabs: state => state.containersAndTabs
 };
 
 const actions = {
@@ -89,10 +94,27 @@ const actions = {
 				});
 		});
 	},
-	moveTo: ({commit}, tabId) => {
+	loadContainersAndTabs: ({commit}) => {
 		return new Promise((resolve, reject) => {
-			axios.post('http://localhost:8888/api/notes/move-to' + noteId, {
-				tabId
+			axios.get('http://localhost:8888/api/containers-tabs')
+				.then(res => {
+					commit('SET_CONTAINERS_AND_TABS', res.data);
+					resolve(res);
+				})
+				.catch((err) => {
+					console.log(err);
+					reject(err);
+				});
+		})
+	},
+	loadContainersAndTabs: ({commit}) => {
+
+	},
+	moveTo: ({commit}, data) => {
+		return new Promise((resolve, reject) => {
+			axios.put('http://localhost:8888/api/notes/move-to', {
+				id: data.noteId,
+				tabId: data.tabId
 			})
 				.then(res => {
 					resolve(res)

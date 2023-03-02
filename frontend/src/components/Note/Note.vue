@@ -2,7 +2,7 @@
 	<div id="note" class="col-3 mt-4" style="margin-top: 36px !important;">
 		<div style="background-color:#fdcb6e;" class="shadow-sm">
 			<div class="card-header d-flex justify-content-between">
-				{{ note.title | short }} 
+				{{ note.title | short }}
 				<!-- <a href="#" @click="removeNote" class="ml-auto float-right">&times;</a> -->
 				<div class="dropdown">
   <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -14,10 +14,9 @@
             class="nav-link text-primary"
             data-bs-toggle="modal"
             data-bs-target="#noteMoveToModal"
-            data-bs-whatever="@getbootstrap">
+            data-bs-whatever="@getbootstrap" @click="setNote">
 			<i class="bi bi-arrows-move"></i> Move
-        </a>
-			
+		</a>
 	
 	</li>
     <li><a href="javascript:void(0)" @click="removeNote" class="dropdown-item text-danger"><i class="bi bi-trash"></i> Remove</a></li>
@@ -68,9 +67,15 @@
 				this.$store.dispatch('destroyNote', this.note.id)
 					.then((res) => this.$store.dispatch('loadNotes', this.note.tabId));
 			},
-			moveTo() {
-				const to = prompt('');
-				alert(to)
+			setNote() {
+				localStorage.setItem('note', JSON.stringify(this.note))
+				this.$store.dispatch('loadContainersAndTabs')
+					.then(res => {
+						console.log('Containers and tabs have loaded!');
+					})
+					.catch(err => {
+						console.log(err);
+					})
 			}
 		},
 		components: {
