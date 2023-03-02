@@ -8,7 +8,7 @@
   <button class="btn btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     <!-- <i class="bi bi-gear-fill"></i> -->
 	<!-- <i class="bi bi-sliders"></i> -->
-	<i class="bi bi-three-dots-vertical"></i>
+	<i class="bi bi-three-dots"></i>
   </button>
   <ul class="dropdown-menu">
     <li>
