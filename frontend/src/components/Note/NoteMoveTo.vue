@@ -44,15 +44,17 @@
 		methods: {
 			moveTo() {
 				const note = JSON.parse(localStorage.getItem('note'));
-				this.$store.dispatch('moveTo', {noteId: note.id, tabId: this.tabId})
-					.then(() => {
-						this.$store.dispatch('loadNotes', note.tabId);
-						document.querySelector('#note-move-select').selectedIndex = 0;
-						document.querySelector('#note-move-close-btn').click();
-					})
-					.catch((err) => {
-						console.log(err);
-					});
+				if(!note.tabId !== this.tabId) {
+					this.$store.dispatch('moveTo', {noteId: note.id, tabId: this.tabId})
+						.then(() => {
+							this.$store.dispatch('loadNotes', note.tabId);
+							document.querySelector('#note-move-select').selectedIndex = 0;
+							document.querySelector('#note-move-close-btn').click();
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+					}
 
 			}
 		}
