@@ -45,7 +45,7 @@ localhost:8888
 
 ![Screenshot](https://github.com/magdyismail88/notebook/blob/0c600ec2e2689f009e00100825c6a09d44208a62/assets/01.png?raw=true")
 
-![Screenshot](https://github.com/magdyismail88/notebook/blob/2fe5e245c408219ffdedf989f25fb87d8bf6ae75/assets/02.png?raw=true")
+![Screenshot](https://github.com/magdyismail88/notebook/blob/21db9085cf1330aa655aa49db4483ee264700252/assets/02.png?raw=true")
 
 ![Screenshot](https://github.com/magdyismail88/notebook/blob/0c600ec2e2689f009e00100825c6a09d44208a62/assets/03.png?raw=true")
 
